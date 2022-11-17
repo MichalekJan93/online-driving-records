@@ -1,0 +1,96 @@
+/* COLORS */
+.calendar {
+  width: 400px;
+  box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
+  padding: 1rem;
+  border-radius: 5px;
+  position: absolute;
+  left: 50px;
+  top: 100px;
+}
+.calendar .date {
+  display: flex;
+  justify-content: space-around;
+}
+.calendar .date .btn-control {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.calendar .date .btn-control:hover {
+  box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
+}
+.calendar .date .btn-control img {
+  width: 20px;
+}
+.calendar .date #left {
+  transform: rotate(180deg);
+}
+.calendar .date .year-with-months {
+  font-weight: bold;
+}
+.calendar .weekend {
+  margin-top: 2rem;
+  display: flex;
+}
+.calendar .weekend p {
+  width: 14%;
+  text-align: center;
+  font-weight: bold;
+}
+.calendar .days {
+  display: flex;
+  flex-wrap: wrap;
+}
+.calendar .days p {
+  width: 14%;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+}
+.calendar .days p:hover {
+  box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
+}
+.calendar .days .select-day {
+  background-color: #54A0FF;
+  color: white;
+}
+.calendar .days .select-day:hover {
+  background-color: #54A0FF;
+  color: white;
+}
+.calendar .confirmation {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+.calendar .confirmation .btn {
+  width: 48%;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.calendar .confirmation .btn:hover {
+  box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
+}
+.calendar .confirmation .cancel {
+  background-color: #ecf6ff;
+}
+.calendar .confirmation .confirm {
+  background-color: #54A0FF;
+  color: white;
+}
+.calendar .confirmation .confirm:hover {
+  background-color: #54A0FF;
+}
+
+/*# sourceMappingURL=calendar.css.map */
