@@ -12,8 +12,10 @@
   .date{
     display: flex;
     justify-content: space-around;
+    position: relative;
 
     .btn-control{
+      position: absolute;
       background-color: white;
       border: none;
       border-radius: $borderRadius;
@@ -36,6 +38,11 @@
 
     #left{
       transform: rotate(180deg);
+      left: 10%;
+    }
+
+    #right{
+      right: 10%;
     }
 
     .year-with-months{
@@ -57,6 +64,7 @@
   .days{
     display: flex;
     flex-wrap: wrap;
+    height: 210px;
 
     p{
       width: 14%;
@@ -70,14 +78,18 @@
       }
     }
 
-    .select-day{
-      background-color: $mainColor;
-      color: white;
+    .last-month{
+      color: $nonActiveColor;
+      cursor: default;
 
       &:hover{
-        background-color: $mainColorHover;
-        color: white;
+        box-shadow: none;
       }
+    }
+
+    .today{
+      background-color: $mainColor;
+      color: white;
     }
   }
 

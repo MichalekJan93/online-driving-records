@@ -11,8 +11,10 @@
 .calendar .date {
   display: flex;
   justify-content: space-around;
+  position: relative;
 }
 .calendar .date .btn-control {
+  position: absolute;
   background-color: white;
   border: none;
   border-radius: 5px;
@@ -32,6 +34,10 @@
 }
 .calendar .date #left {
   transform: rotate(180deg);
+  left: 10%;
+}
+.calendar .date #right {
+  right: 10%;
 }
 .calendar .date .year-with-months {
   font-weight: bold;
@@ -48,6 +54,7 @@
 .calendar .days {
   display: flex;
   flex-wrap: wrap;
+  height: 210px;
 }
 .calendar .days p {
   width: 14%;
@@ -59,11 +66,14 @@
 .calendar .days p:hover {
   box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
 }
-.calendar .days .select-day {
-  background-color: #54A0FF;
-  color: white;
+.calendar .days .last-month {
+  color: #C8D6E5;
+  cursor: default;
 }
-.calendar .days .select-day:hover {
+.calendar .days .last-month:hover {
+  box-shadow: none;
+}
+.calendar .days .today {
   background-color: #54A0FF;
   color: white;
 }
@@ -90,7 +100,7 @@
   color: white;
 }
 .calendar .confirmation .confirm:hover {
-  background-color: #54A0FF;
+  background-color: #4195ff;
 }
 
 /*# sourceMappingURL=calendar.css.map */
