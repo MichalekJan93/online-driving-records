@@ -14,17 +14,66 @@ export class Calendar {
             'November',
             'December'
         ];
+        this._nameOfDay = [
+            'Mo',
+            'Tu',
+            'We',
+            'Th',
+            'Fr',
+            'Sa',
+            'Su'
+        ];
         this._date = new Date();
         this._currentMonth = this._date.getMonth();
         this._currentYear = this._date.getFullYear();
-        /**
-         * The method for finding how many days are in February.
-         * @param year {number} The year in which we find out how many days February has
-         * @returns {number} Number of days in February
-         * @private
-         */
-        this._getFebDays = (year) => {
-            return this._isLeapYear(year) ? 29 : 28;
+        this._createCalendar = () => {
+            const divCalendar = document.createElement('div');
+            const divDate = document.createElement('div');
+            const divWeekend = document.createElement('div');
+            const divDays = document.createElement('div');
+            const divConfirmation = document.createElement('div');
+            const buttonLeft = document.createElement('button');
+            const buttonRight = document.createElement('button');
+            const buttonCancel = document.createElement('button');
+            const buttonConfirm = document.createElement('button');
+            const imgButtonLeft = document.createElement('img');
+            const imgButtonRight = document.createElement('img');
+            const paragraphYearWithMonths = document.createElement('p');
+            divCalendar.setAttribute('class', 'calendar');
+            divDate.setAttribute('class', 'date');
+            divWeekend.setAttribute('class', 'weekend');
+            divDays.setAttribute('class', 'days');
+            divConfirmation.setAttribute('class', 'confirmation');
+            buttonLeft.setAttribute('class', 'btn-control');
+            buttonLeft.setAttribute('id', 'left');
+            buttonRight.setAttribute('class', 'btn-control');
+            buttonRight.setAttribute('id', 'right');
+            imgButtonLeft.setAttribute('src', 'img/arrow.png');
+            imgButtonLeft.setAttribute('alt', 'Company car application');
+            imgButtonRight.setAttribute('src', 'img/arrow.png');
+            imgButtonRight.setAttribute('alt', 'Company car application');
+            buttonCancel.setAttribute('class', 'btn cancel');
+            buttonConfirm.setAttribute('class', 'btn confirm');
+            paragraphYearWithMonths.setAttribute('class', 'year-with-months');
+            buttonCancel.innerText = 'Cancel';
+            buttonConfirm.innerText = 'Done';
+            document.body.appendChild(divCalendar);
+            divCalendar.appendChild(divDate);
+            divDate.appendChild(buttonLeft);
+            divDate.appendChild(paragraphYearWithMonths);
+            divDate.appendChild(buttonRight);
+            buttonLeft.appendChild(imgButtonLeft);
+            buttonRight.appendChild(imgButtonRight);
+            divCalendar.appendChild(divWeekend);
+            divCalendar.appendChild(divDays);
+            divCalendar.appendChild(divConfirmation);
+            divConfirmation.appendChild(buttonCancel);
+            divConfirmation.appendChild(buttonConfirm);
+            for (let i = 0; i < this._nameOfDay.length; i++) {
+                const paragraphNameofDay = document.createElement('p');
+                paragraphNameofDay.innerText = this._nameOfDay[i];
+                divWeekend.appendChild(paragraphNameofDay);
+            }
         };
         /**
          * The method for finding the number of days in a month
@@ -32,6 +81,12 @@ export class Calendar {
          */
         this._lastDateOfMonth = () => {
             return new Date(this._currentYear, this._currentMonth + 1, 0).getDate();
+        };
+        this._firstDayOfMonth = () => {
+            return new Date(this._currentYear, this._currentMonth, 1).getDay();
+        };
+        this._lastDateOfLastMonth = () => {
+            return new Date(this._currentYear, this._currentMonth, 0).getDate();
         };
         this._yearInCalendar = () => {
             let yearWithMonth = document.querySelector('.year-with-months');
@@ -41,11 +96,19 @@ export class Calendar {
         this._daysInCalendar = () => {
             const daysDiv = document.querySelector('.days');
             daysDiv.innerHTML = '';
-            const numbersOfDaysInMonth = this._lastDateOfMonth();
-            for (let i = 0; i < numbersOfDaysInMonth; i++) {
+            for (let i = this._firstDayOfMonth(); i > 1; i--) {
                 let numberOfDayParagraph = document.createElement('p');
-                numberOfDayParagraph.setAttribute('class', `day${i}`);
-                numberOfDayParagraph.innerHTML = String(i + 1);
+                numberOfDayParagraph.setAttribute('class', `last-month day${i}`);
+                numberOfDayParagraph.innerHTML = String(this._lastDateOfLastMonth() - i + 2);
+                daysDiv.appendChild(numberOfDayParagraph);
+            }
+            for (let i = 1; i <= this._lastDateOfMonth(); i++) {
+                let isToday = i === this._date.getDate() && this._currentMonth === new Date().getMonth()
+                    && this._currentYear === new Date().getFullYear() ? 'this-month today' : 'this-month';
+                let numberOfDayParagraph = document.createElement('p');
+                numberOfDayParagraph.setAttribute('class', `${isToday}`);
+                numberOfDayParagraph.setAttribute('id', `day${i}`);
+                numberOfDayParagraph.innerHTML = String(i);
                 daysDiv.appendChild(numberOfDayParagraph);
             }
         };
@@ -53,7 +116,7 @@ export class Calendar {
             let controlBtn = document.querySelectorAll('.btn-control');
             controlBtn.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    this._currentMonth = btn.id === 'left' ? this._currentMonth - 1 : this._currentMonth + 1;
+                    this._currentMonth = btn['id'] === 'left' ? this._currentMonth - 1 : this._currentMonth + 1;
                     if (this._currentMonth === 12) {
                         this._currentMonth = 0;
                         this._currentYear += 1;
@@ -62,26 +125,19 @@ export class Calendar {
                         this._currentMonth = 11;
                         this._currentYear -= 1;
                     }
-                    console.log(this._currentMonth + '----' + this._currentYear);
                     this._yearInCalendar();
                     this._daysInCalendar();
                 });
             });
         };
+        this.actuallyMonthWithYear = () => {
+            return `${this._currentMonth} ${this._currentYear}`;
+        };
         this.createCalendar = () => {
+            this._createCalendar();
             this._yearInCalendar();
             this._daysInCalendar();
             this._controlCalendar();
         };
-    }
-    /**
-     * The method detects if the year is a leap year
-     * @param year {number} The year for which we want to find out if it is a leap year
-     * @returns {boolean} Returns true if the year is a leap year, otherwise false
-     * @private
-     */
-    _isLeapYear(year) {
-        return ((year % 4 === 0 && year % 100 != 0 && year % 400 != 0) ||
-            (year % 100 === 0 && year % 400 === 0));
     }
 }
