@@ -1,48 +1,37 @@
 import {Calendar} from "./components/calendar.js";
 
 const calendar = new Calendar();
+let select: string[];
 
 calendar.createCalendar();
 
+function markingDate(): void{
+    let daysInCalendar: NodeList = document.querySelectorAll('.this-month');
 
-/*Control calendar*/
-let dateArray: string[];
-
-let daysInCalendar:NodeList = document.querySelectorAll('.this-month');
-
-daysInCalendar.forEach(oneDay => {
-    oneDay.addEventListener('click', () => {
-        dateArray = [];
-        let acutalyMonthAndYear = calendar.actuallyMonthWithYear();
-        let sArray = acutalyMonthAndYear.split(" ");
-        for(let i = 0; i < sArray.length; i++){
-            dateArray.push(sArray[i]);
-        }
-        let day = oneDay['id'].substring(3,oneDay['id'].length);
-        dateArray.push(day)
-        console.log(dateArray);
-    })
-})
-
-const observer = new MutationObserver(MutationRecord =>{
-    let daysInCalendar:NodeList = document.querySelectorAll('.this-month');
-
-    daysInCalendar.forEach(oneDay => {
-        oneDay.addEventListener('click', () => {
-            dateArray = [];
-            let acutalyMonthAndYear = calendar.actuallyMonthWithYear();
-            let sArray = acutalyMonthAndYear.split(" ");
-            for(let i = 0; i < sArray.length; i++){
-                dateArray.push(sArray[i]);
-            }
-            let day = oneDay['id'].substring(3,oneDay['id'].length);
-            dateArray.push(day)
-            console.log(dateArray);
+    daysInCalendar.forEach(selectDay => {
+        selectDay.addEventListener('click', () => {
+            select = calendar.selecetDayInCalendar(selectDay);
         })
     })
+}
+
+function confirmDateSelection(): void{
+    const btn: HTMLButtonElement = document.querySelector('.confirm');
+
+    btn.addEventListener('click', () => {
+        console.log(select);
+        calendar.deleteCalendar();
+    })
+}
+
+markingDate();
+confirmDateSelection();
+
+const observer = new MutationObserver(MutationRecord =>{
+    markingDate();
 });
 
-const targetNode = document.querySelector('.days');
+const targetNode: HTMLDivElement = document.querySelector('.days');
 
 observer.observe(targetNode, {
     childList: true,

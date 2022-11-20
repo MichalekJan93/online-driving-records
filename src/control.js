@@ -1,37 +1,26 @@
 import { Calendar } from "./components/calendar.js";
 const calendar = new Calendar();
+let select;
 calendar.createCalendar();
-/*Control calendar*/
-let dateArray;
-let daysInCalendar = document.querySelectorAll('.this-month');
-daysInCalendar.forEach(oneDay => {
-    oneDay.addEventListener('click', () => {
-        dateArray = [];
-        let acutalyMonthAndYear = calendar.actuallyMonthWithYear();
-        let sArray = acutalyMonthAndYear.split(" ");
-        for (let i = 0; i < sArray.length; i++) {
-            dateArray.push(sArray[i]);
-        }
-        let day = oneDay['id'].substring(3, oneDay['id'].length);
-        dateArray.push(day);
-        console.log(dateArray);
-    });
-});
-const observer = new MutationObserver(MutationRecord => {
+function markingDate() {
     let daysInCalendar = document.querySelectorAll('.this-month');
-    daysInCalendar.forEach(oneDay => {
-        oneDay.addEventListener('click', () => {
-            dateArray = [];
-            let acutalyMonthAndYear = calendar.actuallyMonthWithYear();
-            let sArray = acutalyMonthAndYear.split(" ");
-            for (let i = 0; i < sArray.length; i++) {
-                dateArray.push(sArray[i]);
-            }
-            let day = oneDay['id'].substring(3, oneDay['id'].length);
-            dateArray.push(day);
-            console.log(dateArray);
+    daysInCalendar.forEach(selectDay => {
+        selectDay.addEventListener('click', () => {
+            select = calendar.selecetDayInCalendar(selectDay);
         });
     });
+}
+function confirmDateSelection() {
+    const btn = document.querySelector('.confirm');
+    btn.addEventListener('click', () => {
+        console.log(select);
+        calendar.deleteCalendar();
+    });
+}
+markingDate();
+confirmDateSelection();
+const observer = new MutationObserver(MutationRecord => {
+    markingDate();
 });
 const targetNode = document.querySelector('.days');
 observer.observe(targetNode, {

@@ -1,5 +1,6 @@
 export class Calendar {
 
+    // Month Names to display the name of the month in the calendar
     private _monthNames: string[] = [
         'January',
         'February',
@@ -14,6 +15,8 @@ export class Calendar {
         'November',
         'December'
     ];
+
+    // Days of the week displayed on the calendar
     private _nameOfDay = [
         'Mo',
         'Tu',
@@ -25,9 +28,14 @@ export class Calendar {
     ]
 
     private _date: Date = new Date();
+    // The selected month that is displayed in the calendar
     private _currentMonth: number = this._date.getMonth();
+    // The selected year that is displayed in the calendar
     private _currentYear: number = this._date.getFullYear();
 
+    /**
+     * Method for create Calendar with its DOM elements
+     */
     private _createCalendar = (): void => {
         const divCalendar:HTMLDivElement  = document.createElement('div');
         const divDate:HTMLDivElement  = document.createElement('div');
@@ -85,7 +93,6 @@ export class Calendar {
         }
     }
 
-
     /**
      * The method for finding the number of days in a month
      * @returns {number} Number of days in a month
@@ -94,24 +101,39 @@ export class Calendar {
         return new Date(this._currentYear, this._currentMonth + 1, 0).getDate();
     }
 
+    /**
+     * Method for finding the first day of the month
+     * @returns {number} First day of the month
+     */
     private _firstDayOfMonth = (): number => {
         return new Date(this._currentYear, this._currentMonth,1).getDay();
     }
 
+    /**
+     * A method to find the last day in the previous month
+     * @returns {number} Last day of the last month
+     */
     private _lastDateOfLastMonth = (): number => {
         return new Date(this._currentYear, this._currentMonth,0).getDate();
     }
 
+    /**
+     * A method to insert the month and year into the calendar header
+     */
     private _yearInCalendar = (): void => {
         let yearWithMonth: HTMLDivElement = document.querySelector('.year-with-months');
         yearWithMonth.innerHTML = '';
         yearWithMonth.innerHTML = `${this._monthNames[this._currentMonth]} ${this._currentYear}`
     }
 
+    /**
+     * A method to insert days into a calendar
+     */
     private _daysInCalendar = (): void => {
         const daysDiv: HTMLDivElement = document.querySelector('.days');
         daysDiv.innerHTML = '';
 
+        // A cycle for inserting days from the previous month into the calendar
         for(let i = this._firstDayOfMonth(); i > 1; i--){
             let numberOfDayParagraph: HTMLElement = document.createElement('p');
             numberOfDayParagraph.setAttribute('class', `last-month day${i}`)
@@ -119,6 +141,7 @@ export class Calendar {
             daysDiv.appendChild(numberOfDayParagraph);
         }
 
+        // Cycle for inserting days from the selected month into the calendar
         for(let i = 1; i <= this._lastDateOfMonth(); i++){
             let isToday: string = i === this._date.getDate() && this._currentMonth === new Date().getMonth()
                         && this._currentYear === new Date().getFullYear() ? 'this-month today' : 'this-month';
@@ -131,6 +154,9 @@ export class Calendar {
         }
     }
 
+    /**
+     * A method to control the calendar
+     */
     private _controlCalendar = (): void => {
         let controlBtn: NodeList = document.querySelectorAll('.btn-control');
         controlBtn.forEach(btn =>{
@@ -153,14 +179,69 @@ export class Calendar {
         })
     }
 
-    actuallyMonthWithYear = (): string => {
-            return `${this._currentMonth} ${this._currentYear}`;
+    /**
+     * The method styles the date selected by the user
+     * @param selectedDay Selected date
+     * @returns {string[]} The complete date selected by the user
+     */
+    selecetDayInCalendar = (selectedDay): string[]=> {
+        let daysInCalendar: NodeList = document.querySelectorAll('.this-month');
+
+        let _selecetDay: string[] = [];
+        let actuallyMonthAndYear = `${this._currentMonth} ${this._currentYear}`;
+        let newArray: string[] = actuallyMonthAndYear.split(" ");
+
+        for(let i = 0; i < newArray.length; i++){
+            _selecetDay.push(newArray[i]);
+        }
+
+        daysInCalendar.forEach(day => {
+
+            // @ts-ignore
+            if(day.className != 'this-month today'){
+                // @ts-ignore
+                day.setAttribute('class', 'this-month');
+
+            }
+        })
+
+        let day = selectedDay['id'].substring(3,selectedDay['id'].length);
+        _selecetDay.push(day);
+
+        // @ts-ignore
+        selectedDay.classList.add('selected-day');
+        return _selecetDay;
     }
 
+    /**
+     * A method to capture clicks on the cancel button
+     * Method calls the deleteCalendar() method, which deletes the calendar
+     */
+    private _cancelCalendar = (): void => {
+        const btn: HTMLButtonElement = document.querySelector('.cancel');
+
+        btn.addEventListener('click', () => {
+            this.deleteCalendar()
+        })
+
+    }
+
+    /**
+     * The method deletes the calendar
+     */
+    deleteCalendar = (): void => {
+        const _calendar = document.querySelector('.calendar');
+        _calendar.remove();
+    }
+
+    /**
+     * The method starts the necessary methods to display and control the calendar
+     */
     createCalendar = () => {
         this._createCalendar();
         this._yearInCalendar();
         this._daysInCalendar();
         this._controlCalendar();
+        this._cancelCalendar();
     }
 }
