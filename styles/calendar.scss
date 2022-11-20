@@ -1,4 +1,5 @@
 @import 'Variables';
+@import 'Mixins';
 
 .calendar{
   width: 400px;
@@ -8,6 +9,8 @@
   position: absolute;
   left: 50px;
   top: 100px;
+  @include animate(fade-out, 400ms);
+  @include keyFrameShow;
 
   .date{
     display: flex;
@@ -65,9 +68,11 @@
     display: flex;
     flex-wrap: wrap;
     height: 210px;
+    gap: 3px;
+    align-items: center;
 
     p{
-      width: 14%;
+      width: 13%;
       text-align: center;
       cursor: pointer;
       padding: 5px;
@@ -89,6 +94,11 @@
 
     .today{
       background-color: $mainColor;
+      color: white;
+    }
+
+    .selected-day{
+      background-color: $selected-color;
       color: white;
     }
   }
