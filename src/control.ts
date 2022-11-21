@@ -38,3 +38,11 @@ observer.observe(targetNode, {
     subtree: true,
     characterDataOldValue: true
 });
+
+/*let addRecords = document.querySelectorAll('.img-add-record');
+
+addRecords.forEach(icon => {
+    icon.addEventListener('click', (event) => {
+        console.log(event['layerX'], event['layerY']);
+    })
+})*/

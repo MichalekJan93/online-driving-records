@@ -5,6 +5,11 @@
   box-sizing: border-box;
   font-family: "Poppins";
   font-size: 0.9rem;
+  cursor: default;
+}
+
+body {
+  background-color: rgba(231, 231, 231, 0.52);
 }
 
 .container {
@@ -20,15 +25,13 @@
   border-bottom-right-radius: 15px;
 }
 .container .left-sidebar .logo {
+  margin-top: 1.8rem;
   margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
 }
-.container .left-sidebar .logo h1 {
-  font-size: 1.5rem;
-  text-align: center;
-}
-.container .left-sidebar .logo h1 span {
-  color: #54A0FF;
-  font-size: 1.5rem;
+.container .left-sidebar .logo img {
+  width: 70px;
 }
 .container .left-sidebar .menu li {
   display: flex;
@@ -72,6 +75,13 @@
 }
 .container .right-sidebar {
   width: 100%;
+  padding-left: 2rem;
+}
+.container .right-sidebar .header {
+  margin-top: 2.5rem;
+}
+.container .right-sidebar .header .title h1 {
+  font-size: 1.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

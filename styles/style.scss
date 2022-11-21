@@ -8,8 +8,12 @@
   box-sizing: border-box;
   font-family: "Poppins";
   font-size: 0.9rem;
+  cursor: default;
 }
 
+body{
+  background-color: rgba(231, 231, 231, 0.52);
+}
 
 .container{
   display: flex;
@@ -24,15 +28,13 @@
     border-bottom-right-radius: 15px;
 
     .logo{
+      margin-top: 1.8rem;
       margin-bottom: 40px;
+      display: flex;
+      justify-content: center;
 
-      h1{
-        font-size: 1.5rem;
-        text-align: center;
-        span{
-          color: $mainColor;
-          font-size: 1.5rem;
-        }
+      img{
+        width: 70px;
       }
     }
 
@@ -79,5 +81,17 @@
 
   .right-sidebar{
     width: 100%;
+    padding-left: 2rem;
+
+    .header{
+      margin-top: 2.5rem;
+
+      .title{
+
+        h1{
+          font-size: 1.5rem;
+        }
+      }
+    }
   }
 }
