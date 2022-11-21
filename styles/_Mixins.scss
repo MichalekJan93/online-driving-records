@@ -9,6 +9,17 @@
   }
 }
 
+@mixin keyFrameWidth ($width) {
+  @keyframes widthMove  {
+    from{
+      width: 0px;
+    }
+    to {
+      width: $width;
+    }
+  }
+}
+
 @mixin animate($animation, $times){
   animation: $animation $times;
 }

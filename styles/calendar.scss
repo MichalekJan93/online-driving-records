@@ -2,8 +2,9 @@
 @import 'Mixins';
 
 .calendar{
-  width: 400px;
+  width: 300px;
   box-shadow: $shadow;
+  background-color: white;
   padding: 1rem;
   border-radius: $borderRadius;
   position: absolute;
