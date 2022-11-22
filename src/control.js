@@ -35,3 +35,17 @@ addRecords.forEach(icon => {
         console.log(event['layerX'], event['layerY']);
     })
 })*/
+const showControls = document.querySelector('.show-records');
+const filters = document.querySelectorAll('.filters');
+showControls.addEventListener('click', () => {
+    const addRecord = document.querySelector('.add-record');
+    // @ts-ignore
+    addRecord.style.display = 'block';
+    function interval() {
+        filters.forEach(filter => {
+            // @ts-ignore
+            filter.style.display = 'flex';
+        });
+    }
+    const myTemiout = setTimeout(interval, 300);
+});

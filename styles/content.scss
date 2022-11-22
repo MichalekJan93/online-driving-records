@@ -3,52 +3,117 @@
 @import 'mixins';
 
 .content{
-  @include animate(fade-out, 400ms);
-  @include keyFrameShow;
+  margin-top: 2rem;
 
-  .filters{
+  .control-records{
     display: flex;
+    justify-content: right;
     align-items: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    max-width: 990px;
+    position: relative;
 
-    .input-filter{
+    &:after{
+      content: '';
+      position: absolute;
+      width: 96%;
+      left: 0;
+      height: 1px;
+      background-color: $nonActiveColor;
+    }
+
+    img{
+      width: 20px;
+      transform: rotate(90deg);
+      cursor: pointer;
+    }
+  }
+
+  .add-record{
+    height: 80px;
+    @include animate(heightMove, 1000ms);
+    @include keyFrameHeight(80px);
+    display: none;
+
+    .filters{
       display: flex;
       align-items: center;
-      gap: 5px;
-      background-color: white;
-      border-radius: 5px;
-      padding: 5px 10px;
+      gap: 2rem;
+      display: none;
+      @include animate(fade-out, 400ms);
+      @include keyFrameShow;
 
-      label{
-        font-weight: bold;
+      &:nth-child(2){
+        margin-top: 1rem;
+      }
 
-        &:after{
-          content: ':';
+      .input-filter{
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: space-between;
+        gap: 5px;
+        background-color: white;
+        border-radius: 5px;
+        padding: 5px 10px;
+        width: 260px;
+
+        label{
+          font-weight: bold;
+
+          &:after{
+            content: ':';
+          }
+        }
+
+        input {
+          border: none;
+          background-color: transparent;
+        }
+
+        img{
+          width: 15px;
+          height: 15px;
+          cursor: pointer;
+        }
+
+        .img-arrow{
+          transform: rotate(90deg);
+        }
+
+        .input-driver-drivers{
+          position: absolute;
+          top: 33px;
+          left: 0px;
+          z-index: 999;
+          width: 260px;
+          background-color: white;
+          padding: 5px;
+          border-radius: 5px;
+          max-height: 100px;
+          overflow: auto;
+
+          .drivers-driver{
+            cursor: pointer;
+            transition: all ease-out 100ms;
+
+            &:hover{
+              font-weight: 600;
+            }
+          }
         }
       }
 
-      input{
+      button{
+        background-color: $mainColor;
+        color: white;
         border: none;
-      }
-
-      img{
-        width: 15px;
-        height: 15px;
+        padding: 5px 10px;
+        border-radius: 5px;
         cursor: pointer;
-      }
-    }
 
-    button{
-      background-color: $mainColor;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-
-      &:hover{
-        background-color: $mainColorHover;
+        &:hover{
+          background-color: $mainColorHover;
+        }
       }
     }
   }
@@ -68,6 +133,8 @@
   .records{
     max-width: 1000px;
     margin-right: 1rem;
+    @include animate(fade-out, 600ms);
+    @include keyFrameShow;
 
     .record{
       display: flex;

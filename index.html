@@ -27,18 +27,45 @@
                 <div class="title"><h1>Kniha jízd</h1></div>
             </div>
             <div class="content">
-                <div class="filters">
-                    <div class="input-filter">
-                        <label for="input-from">Počátek jízdy</label>
-                        <input type="date" id="input-from" disabled>
-                        <img class="img-add-record" src="./img/date.png" alt="Company car">
+                <div class="control-records">
+                    <img class="show-records" src="./img/arrow.png" alt="">
+                </div>
+                <div class="add-record">
+                    <div class="filters">
+                        <div class="input-filter">
+                            <label for="input-driver">Řidič</label>
+                            <input type="text" id="input-driver" disabled>
+                            <img class="img-add-record img-arrow" src="./img/arrow.png" alt="Company car">
+                            <div class="input-driver-drivers">
+                                <div class="drivers-driver">Pavel Novák</div>
+                                <div class="drivers-driver">Marian Černý</div>
+                                <div class="drivers-driver">Ondřej Modrý</div>
+                            </div>
+                        </div>
+                        <div class="input-filter">
+                            <label for="input-car">Vozidlo</label>
+                            <input type="text" id="input-car" disabled>
+                            <img class="img-add-record img-arrow" src="./img/arrow.png" alt="Company car">
+                            <div class="input-driver-drivers">
+                                <div class="drivers-driver">Mercedes CLK</div>
+                                <div class="drivers-driver">Skoda Fabia</div>
+                                <div class="drivers-driver">Renault Clio</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-filter">
-                        <label for="input-to">Konec jízdy</label>
-                        <input type="date" id="input-to" disabled>
-                        <img class="img-add-record" src="./img/date.png" alt="Company car">
+                    <div class="filters">
+                        <div class="input-filter">
+                            <label for="input-from">Počátek jízdy</label>
+                            <input type="date" id="input-from" disabled>
+                            <img class="img-add-record" src="./img/date.png" alt="Company car">
+                        </div>
+                        <div class="input-filter">
+                            <label for="input-to">Konec jízdy</label>
+                            <input type="date" id="input-to" disabled>
+                            <img class="img-add-record" src="./img/date.png" alt="Company car">
+                        </div>
+                        <button>Přidat záznam</button>
                     </div>
-                    <button>Přidat záznam</button>
                 </div>
                 <div class="record-filters">
                     <div class="driver-filter"><p>Řidič</p></div>

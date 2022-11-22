@@ -20,6 +20,17 @@
   }
 }
 
+@mixin keyFrameHeight ($height) {
+  @keyframes heightMove  {
+    from{
+      height: 0px;
+    }
+    to {
+      height: $height;
+    }
+  }
+}
+
 @mixin animate($animation, $times){
   animation: $animation $times;
 }
