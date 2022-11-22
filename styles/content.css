@@ -62,7 +62,7 @@
   background-color: white;
   border-radius: 5px;
   padding: 5px 10px;
-  width: 260px;
+  width: 265px;
 }
 .content .add-record .filters .input-filter label {
   font-weight: bold;
@@ -93,6 +93,7 @@
   border-radius: 5px;
   max-height: 100px;
   overflow: auto;
+  display: none;
 }
 .content .add-record .filters .input-filter .input-driver-drivers .drivers-driver {
   cursor: pointer;
@@ -100,6 +101,11 @@
 }
 .content .add-record .filters .input-filter .input-driver-drivers .drivers-driver:hover {
   font-weight: 600;
+}
+.content .add-record .filters .input-filter .input-calendar {
+  position: absolute;
+  top: 38px;
+  left: 0px;
 }
 .content .add-record .filters button {
   background-color: #54A0FF;

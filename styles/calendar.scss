@@ -7,20 +7,19 @@
   background-color: white;
   padding: 1rem;
   border-radius: $borderRadius;
-  position: absolute;
-  left: 50px;
-  top: 100px;
   @include animate(fade-out, 400ms);
   @include keyFrameShow;
 
   .date{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     position: relative;
 
     .btn-control{
+      cursor: pointer;
       position: absolute;
-      background-color: white;
+      background-color: white !important;
       border: none;
       border-radius: $borderRadius;
       padding: 2px;
@@ -37,6 +36,7 @@
 
       img{
         width: 20px;
+        cursor: pointer;
       }
     }
 
@@ -122,7 +122,8 @@
     }
 
     .cancel{
-      background-color: #ecf6ff;
+      background-color: #ecf6ff !important;
+      color: black !important;
     }
 
     .confirm{

@@ -5,9 +5,6 @@
   background-color: white;
   padding: 1rem;
   border-radius: 5px;
-  position: absolute;
-  left: 50px;
-  top: 100px;
   animation: fade-out 400ms;
 }
 @keyframes fade-out {
@@ -21,11 +18,13 @@
 .calendar .date {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   position: relative;
 }
 .calendar .date .btn-control {
+  cursor: pointer;
   position: absolute;
-  background-color: white;
+  background-color: white !important;
   border: none;
   border-radius: 5px;
   padding: 2px;
@@ -41,6 +40,7 @@
 }
 .calendar .date .btn-control img {
   width: 20px;
+  cursor: pointer;
 }
 .calendar .date #left {
   transform: rotate(180deg);
@@ -109,7 +109,8 @@
   box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
 }
 .calendar .confirmation .cancel {
-  background-color: #ecf6ff;
+  background-color: #ecf6ff !important;
+  color: black !important;
 }
 .calendar .confirmation .confirm {
   background-color: #54A0FF;

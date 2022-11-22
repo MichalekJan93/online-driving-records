@@ -3,8 +3,6 @@ import {Calendar} from "./components/calendar.js";
 const calendar = new Calendar();
 let select: string[];
 
-calendar.createCalendar();
-
 function markingDate(): void{
     let daysInCalendar: NodeList = document.querySelectorAll('.this-month');
 
@@ -24,10 +22,7 @@ function confirmDateSelection(): void{
     })
 }
 
-markingDate();
-confirmDateSelection();
-
-const observer = new MutationObserver(MutationRecord =>{
+/*const observer = new MutationObserver(MutationRecord =>{
     markingDate();
 });
 
@@ -37,7 +32,7 @@ observer.observe(targetNode, {
     childList: true,
     subtree: true,
     characterDataOldValue: true
-});
+});*/
 
 /*let addRecords = document.querySelectorAll('.img-add-record');
 
@@ -47,6 +42,7 @@ addRecords.forEach(icon => {
     })
 })*/
 
+/*Animace zobrazeni inputu pro pridani zaznamu*/
 const showControls = document.querySelector('.show-records');
 const filters = document.querySelectorAll('.filters');
 
@@ -65,4 +61,17 @@ showControls.addEventListener('click', () => {
     const myTemiout = setTimeout(interval, 300);
 })
 
+/*Zobrazeni kalendare*/
+const addButtonCalendar = document.querySelectorAll('.img-calendar');
+
+addButtonCalendar.forEach(button => {
+    button.addEventListener('click', () => {
+        const location: Element= button.parentElement.lastElementChild;
+
+        calendar.createCalendar(location);
+
+        markingDate();
+        confirmDateSelection();
+    })
+})
 

@@ -36,7 +36,7 @@ export class Calendar {
     /**
      * Method for create Calendar with its DOM elements
      */
-    private _createCalendar = (): void => {
+    private _createCalendar = (location: Element): void => {
         const divCalendar:HTMLDivElement  = document.createElement('div');
         const divDate:HTMLDivElement  = document.createElement('div');
         const divWeekend:HTMLDivElement  = document.createElement('div');
@@ -73,7 +73,7 @@ export class Calendar {
         buttonCancel.innerText = 'Cancel';
         buttonConfirm.innerText = 'Done';
 
-        document.body.appendChild(divCalendar);
+        location.appendChild(divCalendar);
         divCalendar.appendChild(divDate);
         divDate.appendChild(buttonLeft);
         divDate.appendChild(paragraphYearWithMonths);
@@ -237,8 +237,8 @@ export class Calendar {
     /**
      * The method starts the necessary methods to display and control the calendar
      */
-    createCalendar = () => {
-        this._createCalendar();
+    createCalendar = (localiton: Element): void => {
+        this._createCalendar(localiton);
         this._yearInCalendar();
         this._daysInCalendar();
         this._controlCalendar();

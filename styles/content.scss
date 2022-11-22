@@ -55,7 +55,7 @@
         background-color: white;
         border-radius: 5px;
         padding: 5px 10px;
-        width: 260px;
+        width: 265px;
 
         label{
           font-weight: bold;
@@ -91,6 +91,7 @@
           border-radius: 5px;
           max-height: 100px;
           overflow: auto;
+          display: none;
 
           .drivers-driver{
             cursor: pointer;
@@ -100,6 +101,12 @@
               font-weight: 600;
             }
           }
+        }
+
+        .input-calendar{
+          position: absolute;
+          top: 38px;
+          left: 0px;
         }
       }
 

@@ -1,7 +1,6 @@
 import { Calendar } from "./components/calendar.js";
 const calendar = new Calendar();
 let select;
-calendar.createCalendar();
 function markingDate() {
     let daysInCalendar = document.querySelectorAll('.this-month');
     daysInCalendar.forEach(selectDay => {
@@ -17,17 +16,17 @@ function confirmDateSelection() {
         calendar.deleteCalendar();
     });
 }
-markingDate();
-confirmDateSelection();
-const observer = new MutationObserver(MutationRecord => {
+/*const observer = new MutationObserver(MutationRecord =>{
     markingDate();
 });
-const targetNode = document.querySelector('.days');
+
+const targetNode: HTMLDivElement = document.querySelector('.days');
+
 observer.observe(targetNode, {
     childList: true,
     subtree: true,
     characterDataOldValue: true
-});
+});*/
 /*let addRecords = document.querySelectorAll('.img-add-record');
 
 addRecords.forEach(icon => {
@@ -35,6 +34,7 @@ addRecords.forEach(icon => {
         console.log(event['layerX'], event['layerY']);
     })
 })*/
+/*Animace zobrazeni inputu pro pridani zaznamu*/
 const showControls = document.querySelector('.show-records');
 const filters = document.querySelectorAll('.filters');
 showControls.addEventListener('click', () => {
@@ -48,4 +48,14 @@ showControls.addEventListener('click', () => {
         });
     }
     const myTemiout = setTimeout(interval, 300);
+});
+/*Zobrazeni kalendare*/
+const addButtonCalendar = document.querySelectorAll('.img-calendar');
+addButtonCalendar.forEach(button => {
+    button.addEventListener('click', () => {
+        const location = button.parentElement.lastElementChild;
+        calendar.createCalendar(location);
+        markingDate();
+        confirmDateSelection();
+    });
 });
