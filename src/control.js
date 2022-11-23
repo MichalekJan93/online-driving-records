@@ -1,5 +1,5 @@
-import { Calendar } from "./components/calendar.js";
-import { AddRecord } from "./components/addRecord.js";
+import { Calendar } from "./components/Calendar.ts";
+import { AddRecords } from "./components/AddRecords.ts";
 const calendar = new Calendar();
 let select;
 function markingDate() {
@@ -29,7 +29,7 @@ function mutationObs(observer, target) {
 }
 /*Test vlozeni form pro pridani*/
 const content = document.querySelector('.content');
-const addRecord = new AddRecord();
+const addRecord = new AddRecords();
 addRecord.showRecords(content);
 /*let addRecords = document.querySelectorAll('.img-add-record');
 

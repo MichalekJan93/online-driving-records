@@ -1,5 +1,5 @@
-import {Calendar} from "./components/calendar.js";
-import {AddRecord} from "./components/addRecord.js";
+import {Calendar} from "./components/Calendar.js";
+import {AddRecords} from "./components/AddRecords.js";
 
 const calendar = new Calendar();
 let select: string[];
@@ -39,7 +39,7 @@ function mutationObs (observer, target: string): void {
 
 const content: Element = document.querySelector('.content');
 
-const addRecord = new AddRecord();
+const addRecord = new AddRecords();
 addRecord.showRecords(content);
 
 /*let addRecords = document.querySelectorAll('.img-add-record');

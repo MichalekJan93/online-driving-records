@@ -1,4 +1,4 @@
-export class AddRecord {
+export class AddRecords {
     constructor() {
         this._labelNames = [
             'Řidič',

@@ -1,4 +1,4 @@
-export class AddRecord {
+export class AddRecords {
 
     private _labelNames = [
         'Řidič',
