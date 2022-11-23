@@ -76,7 +76,7 @@ body {
 }
 .container .right-sidebar {
   width: 100%;
-  padding-left: 2rem;
+  padding: 0 2rem;
 }
 .container .right-sidebar .header {
   margin-top: 2.5rem;

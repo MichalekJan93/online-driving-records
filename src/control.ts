@@ -1,4 +1,5 @@
 import {Calendar} from "./components/calendar.js";
+import {AddRecord} from "./components/addRecord.js";
 
 const calendar = new Calendar();
 let select: string[];
@@ -22,17 +23,24 @@ function confirmDateSelection(): void{
     })
 }
 
-/*const observer = new MutationObserver(MutationRecord =>{
-    markingDate();
-});
+function mutationObs (observer, target: string): void {
+    console.log('target: ' + target);
+    const targetNode: Node = document.querySelector(`${target}`);
+    console.log('node: ' + targetNode);
 
-const targetNode: HTMLDivElement = document.querySelector('.days');
+    observer.observe(targetNode, {
+        childList: true,
+        subtree: true,
+        characterDataOldValue: true
+    });
+}
 
-observer.observe(targetNode, {
-    childList: true,
-    subtree: true,
-    characterDataOldValue: true
-});*/
+/*Test vlozeni form pro pridani*/
+
+const content: Element = document.querySelector('.content');
+
+const addRecord = new AddRecord();
+addRecord.showRecords(content);
 
 /*let addRecords = document.querySelectorAll('.img-add-record');
 
@@ -72,6 +80,31 @@ addButtonCalendar.forEach(button => {
 
         markingDate();
         confirmDateSelection();
+
+        const observer = new MutationObserver(MutationRecord =>{
+            markingDate();
+        });
+
+        mutationObs(observer,'.days');
+
+    })
+})
+
+/*Zobrazeni vyberu*/
+const addButtonArrow = document.querySelectorAll('.img-arrow');
+
+addButtonArrow.forEach(button => {
+    button.addEventListener('click', () => {
+        const location: Element= button.parentElement.lastElementChild;
+        // @ts-ignore
+        location.style.display = 'block';
+
+        const observer = new MutationObserver(MutationRecord =>{
+            markingDate();
+        });
+
+        mutationObs(observer,'.filters');
+
     })
 })
 
