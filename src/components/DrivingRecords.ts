@@ -17,11 +17,11 @@ export class DrivingRecords {
         const paragraphStartDrive: HTMLParagraphElement = document.createElement('p');
         const paragraphEndDrive: HTMLParagraphElement = document.createElement('p');
 
-        paragraphDriver.innerText = 'Řidič';
-        paragraphCar.innerText = 'Vozidlo';
-        paragraphRegistrationNumber.innerText = 'SPZ';
-        paragraphStartDrive.innerText = 'Počátek jízdy';
-        paragraphEndDrive.innerText = 'Konec jízdy';
+        paragraphDriver.innerText = 'Driver';
+        paragraphCar.innerText = 'Car';
+        paragraphRegistrationNumber.innerText = 'Plates';
+        paragraphStartDrive.innerText = 'Start of the ride';
+        paragraphEndDrive.innerText = 'End of the ride';
 
         recordFiltersDiv.setAttribute('class', 'record-filters');
         driverFilterDiv.setAttribute('class', 'driver-filter');
@@ -87,16 +87,11 @@ export class DrivingRecords {
     private _createRecord(location: Element, dataFromDtb: Promise<[]>){
         let data: Promise<void | []> = dataFromDtb.then(result =>
             result.forEach(data => {
+                let _newDateStartDrive: string = data['startDrive'];
+                _newDateStartDrive = _newDateStartDrive.substring(0, 10);
 
-                let _dateStartDriveCorrectLength: string = data['startDrive'];
-                _dateStartDriveCorrectLength = _dateStartDriveCorrectLength.substring(0, 10);
-                let _dateStartDriveArray: string[] = _dateStartDriveCorrectLength.split('-');
-                let _newDateStartDrive: string = `${_dateStartDriveArray[0]} ${_dateStartDriveArray[1]} ${_dateStartDriveArray[2]}`;
-
-                let _dateEndDriveCorrectLength: string = data['startDrive'];
-                _dateEndDriveCorrectLength = _dateEndDriveCorrectLength.substring(0, 10);
-                let _dateEndDriveArray: string[] = _dateEndDriveCorrectLength.split('-');
-                let _newDateEndDrive: string = `${_dateEndDriveArray[0]} ${_dateEndDriveArray[1]} ${_dateEndDriveArray[2]}`;
+                let _newDateEndDrive: string = data['startDrive'];
+                _newDateEndDrive = _newDateEndDrive.substring(0, 10);
 
                 this._createDOMRecord(location, data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive)
             })

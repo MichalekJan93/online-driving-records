@@ -126,7 +126,7 @@
   font-weight: bold;
 }
 .content .record-filters > * {
-  width: 100px;
+  width: 110px;
 }
 .content .records {
   max-width: 1000px;
@@ -149,7 +149,7 @@
   border-radius: 10px;
 }
 .content .records .record > * {
-  width: 100px;
+  width: 110px;
 }
 .content .records .record .delete-record {
   flex: 1;

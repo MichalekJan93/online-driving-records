@@ -9,6 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { Data } from "../dtb/data.js";
 export class DrivingRecords {
+    /**
+     * Method for create Calendar with its DOM elements
+     */
     _createDOMRecordFilter(location) {
         const recordFiltersDiv = document.createElement('div');
         const driverFilterDiv = document.createElement('div');
@@ -22,11 +25,11 @@ export class DrivingRecords {
         const paragraphRegistrationNumber = document.createElement('p');
         const paragraphStartDrive = document.createElement('p');
         const paragraphEndDrive = document.createElement('p');
-        paragraphDriver.innerText = 'Řidič';
-        paragraphCar.innerText = 'Vozidlo';
-        paragraphRegistrationNumber.innerText = 'SPZ';
-        paragraphStartDrive.innerText = 'Počátek jízdy';
-        paragraphEndDrive.innerText = 'Konec jízdy';
+        paragraphDriver.innerText = 'Driver';
+        paragraphCar.innerText = 'Car';
+        paragraphRegistrationNumber.innerText = 'Plates';
+        paragraphStartDrive.innerText = 'Start of the ride';
+        paragraphEndDrive.innerText = 'End of the ride';
         recordFiltersDiv.setAttribute('class', 'record-filters');
         driverFilterDiv.setAttribute('class', 'driver-filter');
         carFilterDiv.setAttribute('class', 'car-filter');
@@ -84,14 +87,10 @@ export class DrivingRecords {
     }
     _createRecord(location, dataFromDtb) {
         let data = dataFromDtb.then(result => result.forEach(data => {
-            let _dateStartDriveCorrectLength = data['startDrive'];
-            _dateStartDriveCorrectLength = _dateStartDriveCorrectLength.substring(0, 10);
-            let _dateStartDriveArray = _dateStartDriveCorrectLength.split('-');
-            let _newDateStartDrive = `${_dateStartDriveArray[0]} ${_dateStartDriveArray[1]} ${_dateStartDriveArray[2]}`;
-            let _dateEndDriveCorrectLength = data['startDrive'];
-            _dateEndDriveCorrectLength = _dateEndDriveCorrectLength.substring(0, 10);
-            let _dateEndDriveArray = _dateEndDriveCorrectLength.split('-');
-            let _newDateEndDrive = `${_dateEndDriveArray[0]} ${_dateEndDriveArray[1]} ${_dateEndDriveArray[2]}`;
+            let _newDateStartDrive = data['startDrive'];
+            _newDateStartDrive = _newDateStartDrive.substring(0, 10);
+            let _newDateEndDrive = data['startDrive'];
+            _newDateEndDrive = _newDateEndDrive.substring(0, 10);
             this._createDOMRecord(location, data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive);
         }));
     }
