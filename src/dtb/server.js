@@ -29,16 +29,16 @@ car1 = new TripSheets({
     driver: 'Pavel Novák',
     car: 'Ford Focus',
     SPZ: '2T4 5463',
-    startDrive: new Date('2022-6-12'),
-    endDrive: new Date('2022-6-12'),
+    startDrive: new Date('2022-11-12'),
+    endDrive: new Date('2022-11-12'),
 })
 
 car2 = new TripSheets({
     driver: 'Martin Veselý',
     car: 'Škoda Rapid',
     SPZ: '9B8 7541',
-    startDrive: new Date(2022-6-13),
-    endDrive: new Date(2022-6-13),
+    startDrive: new Date('2022-11-13'),
+    endDrive: new Date('2022-11-15'),
 })
 
 car1.save()

@@ -84,8 +84,15 @@ export class DrivingRecords {
     }
     _createRecord(location, dataFromDtb) {
         let data = dataFromDtb.then(result => result.forEach(data => {
-            console.log(data['startDrive']);
-            this._createDOMRecord(location, data['driver'], data['car'], data['SPZ'], data['startDrive'], data['endDrive']);
+            let _dateStartDriveCorrectLength = data['startDrive'];
+            _dateStartDriveCorrectLength = _dateStartDriveCorrectLength.substring(0, 10);
+            let _dateStartDriveArray = _dateStartDriveCorrectLength.split('-');
+            let _newDateStartDrive = `${_dateStartDriveArray[0]} ${_dateStartDriveArray[1]} ${_dateStartDriveArray[2]}`;
+            let _dateEndDriveCorrectLength = data['startDrive'];
+            _dateEndDriveCorrectLength = _dateEndDriveCorrectLength.substring(0, 10);
+            let _dateEndDriveArray = _dateEndDriveCorrectLength.split('-');
+            let _newDateEndDrive = `${_dateEndDriveArray[0]} ${_dateEndDriveArray[1]} ${_dateEndDriveArray[2]}`;
+            this._createDOMRecord(location, data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive);
         }));
     }
     _test() {
