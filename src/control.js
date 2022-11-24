@@ -1,5 +1,6 @@
-import { Calendar } from "./components/Calendar.ts";
-import { AddRecords } from "./components/AddRecords.ts";
+import { Calendar } from "./components/Calendar.js";
+import { AddRecords } from "./components/AddRecords.js";
+import { DrivingRecords } from "./components/DrivingRecords.js";
 const calendar = new Calendar();
 let select;
 function markingDate() {
@@ -31,6 +32,8 @@ function mutationObs(observer, target) {
 const content = document.querySelector('.content');
 const addRecord = new AddRecords();
 addRecord.showRecords(content);
+const addDrivingRecords = new DrivingRecords();
+addDrivingRecords.showDrivingRecords(content);
 /*let addRecords = document.querySelectorAll('.img-add-record');
 
 addRecords.forEach(icon => {

@@ -1,28 +1,32 @@
-import {Data} from "../dtb/data.js";
-
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import { Data } from "../dtb/data.js";
 export class DrivingRecords {
-
-    private _createDOMRecordFilter(location: Element): void{
-        const recordFiltersDiv: HTMLDivElement = document.createElement('div');
-        const driverFilterDiv: HTMLDivElement = document.createElement('div');
-        const carFilterDiv: HTMLDivElement = document.createElement('div');
-        const registrationNumberFilter: HTMLDivElement = document.createElement('div');
-        const startDriveFilterDiv: HTMLDivElement = document.createElement('div');
-        const endDriverFilterDiv: HTMLDivElement = document.createElement('div');
-        const recordsDiv: HTMLDivElement = document.createElement('div');
-
-        const paragraphDriver: HTMLParagraphElement = document.createElement('p');
-        const paragraphCar: HTMLParagraphElement = document.createElement('p');
-        const paragraphRegistrationNumber: HTMLParagraphElement = document.createElement('p');
-        const paragraphStartDrive: HTMLParagraphElement = document.createElement('p');
-        const paragraphEndDrive: HTMLParagraphElement = document.createElement('p');
-
+    _createDOMRecordFilter(location) {
+        const recordFiltersDiv = document.createElement('div');
+        const driverFilterDiv = document.createElement('div');
+        const carFilterDiv = document.createElement('div');
+        const registrationNumberFilter = document.createElement('div');
+        const startDriveFilterDiv = document.createElement('div');
+        const endDriverFilterDiv = document.createElement('div');
+        const recordsDiv = document.createElement('div');
+        const paragraphDriver = document.createElement('p');
+        const paragraphCar = document.createElement('p');
+        const paragraphRegistrationNumber = document.createElement('p');
+        const paragraphStartDrive = document.createElement('p');
+        const paragraphEndDrive = document.createElement('p');
         paragraphDriver.innerText = 'Řidič';
         paragraphCar.innerText = 'Vozidlo';
         paragraphRegistrationNumber.innerText = 'SPZ';
         paragraphStartDrive.innerText = 'Počátek jízdy';
         paragraphEndDrive.innerText = 'Konec jízdy';
-
         recordFiltersDiv.setAttribute('class', 'record-filters');
         driverFilterDiv.setAttribute('class', 'driver-filter');
         carFilterDiv.setAttribute('class', 'car-filter');
@@ -30,7 +34,6 @@ export class DrivingRecords {
         startDriveFilterDiv.setAttribute('class', 'start-drive-filter');
         endDriverFilterDiv.setAttribute('class', 'end-drive-filter');
         recordsDiv.setAttribute('class', 'records');
-
         location.appendChild(recordFiltersDiv);
         recordFiltersDiv.appendChild(driverFilterDiv);
         driverFilterDiv.appendChild(paragraphDriver);
@@ -44,18 +47,16 @@ export class DrivingRecords {
         endDriverFilterDiv.appendChild(paragraphEndDrive);
         location.appendChild(recordsDiv);
     }
-
-    private _createDOMRecord(location: Element, driver: string, car: string, registrationNumber: string, startDrive: string, endDrive: string): void{
-        const recordDiv: HTMLDivElement = document.createElement('div');
-        const driverDiv: HTMLDivElement = document.createElement('div');
-        const carDiv: HTMLDivElement = document.createElement('div');
-        const registrationNumberDiv: HTMLDivElement = document.createElement('div');
-        const startDriveDiv: HTMLDivElement = document.createElement('div');
-        const endDriveDiv: HTMLDivElement = document.createElement('div');
-        const deleteRecordDiv: HTMLDivElement = document.createElement('div');
-        const deleteRecordSpan: HTMLSpanElement = document.createElement('span');
-        const deleteRecordImg: HTMLImageElement = document.createElement('img');
-
+    _createDOMRecord(location, driver, car, registrationNumber, startDrive, endDrive) {
+        const recordDiv = document.createElement('div');
+        const driverDiv = document.createElement('div');
+        const carDiv = document.createElement('div');
+        const registrationNumberDiv = document.createElement('div');
+        const startDriveDiv = document.createElement('div');
+        const endDriveDiv = document.createElement('div');
+        const deleteRecordDiv = document.createElement('div');
+        const deleteRecordSpan = document.createElement('span');
+        const deleteRecordImg = document.createElement('img');
         recordDiv.setAttribute('class', 'record');
         driverDiv.setAttribute('class', 'driver');
         carDiv.setAttribute('class', 'car');
@@ -66,43 +67,37 @@ export class DrivingRecords {
         deleteRecordSpan.setAttribute('class', 'delete-this-record');
         deleteRecordImg.setAttribute('src', './img/cross.png');
         deleteRecordImg.setAttribute('alt', 'Company car');
-
         driverDiv.innerText = driver;
         carDiv.innerText = car;
         registrationNumberDiv.innerText = registrationNumber;
         startDriveDiv.innerText = startDrive;
         endDriveDiv.innerText = endDrive;
-
         location.appendChild(recordDiv);
         recordDiv.appendChild(driverDiv);
         recordDiv.appendChild(carDiv);
         recordDiv.appendChild(registrationNumberDiv);
         recordDiv.appendChild(startDriveDiv);
         recordDiv.appendChild(endDriveDiv);
-        recordDiv.appendChild(deleteRecordDiv)
+        recordDiv.appendChild(deleteRecordDiv);
         deleteRecordDiv.appendChild(deleteRecordSpan);
         deleteRecordSpan.appendChild(deleteRecordImg);
     }
-
-    private _createRecord(location: Element, dataFromDtb: Promise<[]>){
-        let data: Promise<void | []> = dataFromDtb.then(result =>
-            result.forEach(data => {
-                this._createDOMRecord(location, data['driver'], data['car'], data['SPZ'], data['startDrive'], data['endDrive'])
-            })
-        )
+    _createRecord(location, dataFromDtb) {
+        let data = dataFromDtb.then(result => result.forEach(data => {
+            console.log(data['startDrive']);
+            this._createDOMRecord(location, data['driver'], data['car'], data['SPZ'], data['startDrive'], data['endDrive']);
+        }));
     }
-
-    private async _test(){
-        const test = new Data();
-        let x = await test.getRecordsFromDtb('http://localhost:3000/tripsheets')
-        return x
+    _test() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const test = new Data();
+            let x = yield test.getRecordsFromDtb('http://localhost:3000/tripsheets');
+            return x;
+        });
     }
-
-    showDrivingRecords(locationRecordFilters: Element): void{
+    showDrivingRecords(locationRecordFilters) {
         this._createDOMRecordFilter(locationRecordFilters);
-
         const _locationRecords = document.querySelector('.records');
-
         this._createRecord(_locationRecords, this._test());
     }
 }

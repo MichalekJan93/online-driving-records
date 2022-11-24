@@ -1,5 +1,6 @@
 import {Calendar} from "./components/Calendar.js";
 import {AddRecords} from "./components/AddRecords.js";
+import {DrivingRecords} from "./components/DrivingRecords.js";
 
 const calendar = new Calendar();
 let select: string[];
@@ -41,6 +42,10 @@ const content: Element = document.querySelector('.content');
 
 const addRecord = new AddRecords();
 addRecord.showRecords(content);
+
+const addDrivingRecords = new DrivingRecords();
+
+addDrivingRecords.showDrivingRecords(content);
 
 /*let addRecords = document.querySelectorAll('.img-add-record');
 
