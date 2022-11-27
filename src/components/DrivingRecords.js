@@ -9,9 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { Data } from "../dtb/data.js";
 export class DrivingRecords {
-    /**
-     * Method for create Calendar with its DOM elements
-     */
     _createDOMRecordFilter(location) {
         const recordFiltersDiv = document.createElement('div');
         const driverFilterDiv = document.createElement('div');
@@ -97,7 +94,7 @@ export class DrivingRecords {
     _test() {
         return __awaiter(this, void 0, void 0, function* () {
             const test = new Data();
-            let x = yield test.getRecordsFromDtb('http://localhost:3000/tripsheets');
+            let x = yield test.getRecordsFromDtb('http://127.0.0.1:3000/tripsheets');
             return x;
         });
     }

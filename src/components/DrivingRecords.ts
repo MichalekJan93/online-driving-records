@@ -1,7 +1,17 @@
 import {Data} from "../dtb/data.js";
 
+/**
+ * Class for creating a driving record
+ * Class for removing a driving record
+ *
+ */
 export class DrivingRecords {
 
+    /**
+     * Method for create Record with its DOM elements
+     * @param {Element} location The element in which we insert the record
+     * @private
+     */
     private _createDOMRecordFilter(location: Element): void{
         const recordFiltersDiv: HTMLDivElement = document.createElement('div');
         const driverFilterDiv: HTMLDivElement = document.createElement('div');
@@ -45,6 +55,16 @@ export class DrivingRecords {
         location.appendChild(recordsDiv);
     }
 
+    /**
+     * A method for creating an individual driving record
+     * @param {Element} location The element in which we insert the record
+     * @param {String} driver Name of the driver
+     * @param {String} car Car name
+     * @param {String} registrationNumber Car license plate
+     * @param {String} startDrive Start of the ride
+     * @param {String} endDrive End of the ride
+     * @private
+     */
     private _createDOMRecord(location: Element, driver: string, car: string, registrationNumber: string, startDrive: string, endDrive: string): void{
         const recordDiv: HTMLDivElement = document.createElement('div');
         const driverDiv: HTMLDivElement = document.createElement('div');
@@ -84,12 +104,19 @@ export class DrivingRecords {
         deleteRecordSpan.appendChild(deleteRecordImg);
     }
 
+    /**
+     * A method for working with promises
+     * @param {Element} location The element in which we insert the record
+     * @param {Promise} dataFromDtb Data from database
+     * @private
+     */
     private _createRecord(location: Element, dataFromDtb: Promise<[]>){
         let data: Promise<void | []> = dataFromDtb.then(result =>
             result.forEach(data => {
+                // Editing the string so that we write to page only the date, without the time
                 let _newDateStartDrive: string = data['startDrive'];
                 _newDateStartDrive = _newDateStartDrive.substring(0, 10);
-
+                // Editing the string so that we write to page only the date, without the time
                 let _newDateEndDrive: string = data['startDrive'];
                 _newDateEndDrive = _newDateEndDrive.substring(0, 10);
 
@@ -98,17 +125,23 @@ export class DrivingRecords {
         )
     }
 
-    private async _test(){
-        const test = new Data();
-        let x = await test.getRecordsFromDtb('http://localhost:3000/tripsheets')
-        return x
+    /**
+     * Method for get data from database
+     * @private
+     */
+    private async _dataFromDtb(){
+        const _getData = new Data();
+        let dataFromDtb = await _getData.getRecordsFromDtb('http://127.0.0.1:3000/tripsheets')
+        return dataFromDtb
     }
 
-    showDrivingRecords(locationRecordFilters: Element): void{
-        this._createDOMRecordFilter(locationRecordFilters);
-
+    /**
+     * Method for show records
+     * @param {Element} location The element in which we insert the record
+     */
+    showDrivingRecords(location: Element): void{
+        this._createDOMRecordFilter(location);
         const _locationRecords = document.querySelector('.records');
-
-        this._createRecord(_locationRecords, this._test());
+        this._createRecord(_locationRecords, this._dataFromDtb());
     }
 }

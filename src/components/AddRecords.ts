@@ -1,19 +1,29 @@
+/**
+ * A class for creating a form for inserting a new driving record
+ */
 export class AddRecords {
 
-    private _labelNames = [
-        'Řidič',
-        'Vozidlo',
-        'Počátek jízdy',
-        'Konec jízdy',
+    // Array with label names
+    private _labelNames: string[] = [
+        'Driver',
+        'Car',
+        'Start of the ride',
+        'End of the ride',
     ]
 
-    private _inputID = [
+    // Array wait input ID's
+    private _inputID: string[]  = [
         'input-driver',
         'input-car',
         'input-from',
         'input-to',
     ]
 
+    /**
+     * Method to create control-records with its complete DOM
+     * @param {Element} location The element in which we insert the record
+     * @private
+     */
     private _createDOM (location: Element):void {
         const controlRecordsDiv: HTMLDivElement = document.createElement('div');
         const showRecordsImg: HTMLImageElement = document.createElement('img');
@@ -29,13 +39,16 @@ export class AddRecords {
         controlRecordsDiv.appendChild(showRecordsImg);
         location.appendChild(addRecordDiv);
 
+        // We use the index to find out if we are creating inputs for the first or second div filters
         let index: number = 0;
 
+        // Loop to create divs filter
         for(let i = 0; i < 2; i++){
             const inputFiltersDiv: HTMLDivElement = document.createElement('div');
             inputFiltersDiv.setAttribute('class', 'filters');
             addRecordDiv.appendChild(inputFiltersDiv);
 
+            // Loop to create divs input-filter
             for(let k = 0; k < 2; k++){
                 const inputFilterDiv: HTMLDivElement = document.createElement('div');
                 const label: HTMLLabelElement = document.createElement('label');
@@ -86,6 +99,10 @@ export class AddRecords {
 
     }
 
+    /**
+     * Method for show filters
+     * @param {Element} location The element in which we insert the record
+     */
     showRecords(location: Element): void{
         this._createDOM(location);
     }
