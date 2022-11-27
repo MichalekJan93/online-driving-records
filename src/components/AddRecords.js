@@ -1,11 +1,16 @@
+/**
+ * A class for creating a form for inserting a new driving record
+ */
 export class AddRecords {
     constructor() {
+        // Array with label names
         this._labelNames = [
-            'Řidič',
-            'Vozidlo',
-            'Počátek jízdy',
-            'Konec jízdy',
+            'Driver',
+            'Car',
+            'Start of the ride',
+            'End of the ride',
         ];
+        // Array wait input ID's
         this._inputID = [
             'input-driver',
             'input-car',
@@ -13,6 +18,11 @@ export class AddRecords {
             'input-to',
         ];
     }
+    /**
+     * Method to create control-records with its complete DOM
+     * @param {Element} location The element in which we insert the record
+     * @private
+     */
     _createDOM(location) {
         const controlRecordsDiv = document.createElement('div');
         const showRecordsImg = document.createElement('img');
@@ -25,11 +35,14 @@ export class AddRecords {
         location.appendChild(controlRecordsDiv);
         controlRecordsDiv.appendChild(showRecordsImg);
         location.appendChild(addRecordDiv);
+        // We use the index to find out if we are creating inputs for the first or second div filters
         let index = 0;
+        // Loop to create divs filter
         for (let i = 0; i < 2; i++) {
             const inputFiltersDiv = document.createElement('div');
             inputFiltersDiv.setAttribute('class', 'filters');
             addRecordDiv.appendChild(inputFiltersDiv);
+            // Loop to create divs input-filter
             for (let k = 0; k < 2; k++) {
                 const inputFilterDiv = document.createElement('div');
                 const label = document.createElement('label');
@@ -71,6 +84,10 @@ export class AddRecords {
             }
         }
     }
+    /**
+     * Method for show filters
+     * @param {Element} location The element in which we insert the record
+     */
     showRecords(location) {
         this._createDOM(location);
     }

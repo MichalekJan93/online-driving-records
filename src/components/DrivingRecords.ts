@@ -136,6 +136,14 @@ export class DrivingRecords {
     }
 
     /**
+     * Method for delete record
+     * @param {Element} record Record we want to delete
+     */
+    deleteRecord(record: Element): void {
+        record.remove();
+    }
+
+    /**
      * Method for show records
      * @param {Element} location The element in which we insert the record
      */

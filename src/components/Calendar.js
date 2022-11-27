@@ -32,6 +32,8 @@ export class Calendar {
         this._currentYear = this._date.getFullYear();
         /**
          * Method for create Calendar with its DOM elements
+         * @param {Element} location The element in which we insert the calendar
+         * @private
          */
         this._createCalendar = (location) => {
             const divCalendar = document.createElement('div');
@@ -85,6 +87,7 @@ export class Calendar {
         /**
          * The method for finding the number of days in a month
          * @returns {number} Number of days in a month
+         * @private
          */
         this._lastDateOfMonth = () => {
             return new Date(this._currentYear, this._currentMonth + 1, 0).getDate();
@@ -92,6 +95,7 @@ export class Calendar {
         /**
          * Method for finding the first day of the month
          * @returns {number} First day of the month
+         * @private
          */
         this._firstDayOfMonth = () => {
             return new Date(this._currentYear, this._currentMonth, 1).getDay();
@@ -99,12 +103,14 @@ export class Calendar {
         /**
          * A method to find the last day in the previous month
          * @returns {number} Last day of the last month
+         * @private
          */
         this._lastDateOfLastMonth = () => {
             return new Date(this._currentYear, this._currentMonth, 0).getDate();
         };
         /**
          * A method to insert the month and year into the calendar header
+         * @private
          */
         this._yearInCalendar = () => {
             let yearWithMonth = document.querySelector('.year-with-months');
@@ -113,6 +119,7 @@ export class Calendar {
         };
         /**
          * A method to insert days into a calendar
+         * @private
          */
         this._daysInCalendar = () => {
             const daysDiv = document.querySelector('.days');
@@ -137,6 +144,7 @@ export class Calendar {
         };
         /**
          * A method to control the calendar
+         * @private
          */
         this._controlCalendar = () => {
             let controlBtn = document.querySelectorAll('.btn-control');
@@ -185,6 +193,7 @@ export class Calendar {
         /**
          * A method to capture clicks on the cancel button
          * Method calls the deleteCalendar() method, which deletes the calendar
+         * @private
          */
         this._cancelCalendar = () => {
             const btn = document.querySelector('.cancel');

@@ -8,7 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { Data } from "../dtb/data.js";
+/**
+ * Class for creating a driving record
+ * Class for removing a driving record
+ *
+ */
 export class DrivingRecords {
+    /**
+     * Method for create Record with its DOM elements
+     * @param {Element} location The element in which we insert the record
+     * @private
+     */
     _createDOMRecordFilter(location) {
         const recordFiltersDiv = document.createElement('div');
         const driverFilterDiv = document.createElement('div');
@@ -47,6 +57,16 @@ export class DrivingRecords {
         endDriverFilterDiv.appendChild(paragraphEndDrive);
         location.appendChild(recordsDiv);
     }
+    /**
+     * A method for creating an individual driving record
+     * @param {Element} location The element in which we insert the record
+     * @param {String} driver Name of the driver
+     * @param {String} car Car name
+     * @param {String} registrationNumber Car license plate
+     * @param {String} startDrive Start of the ride
+     * @param {String} endDrive End of the ride
+     * @private
+     */
     _createDOMRecord(location, driver, car, registrationNumber, startDrive, endDrive) {
         const recordDiv = document.createElement('div');
         const driverDiv = document.createElement('div');
@@ -82,25 +102,48 @@ export class DrivingRecords {
         deleteRecordDiv.appendChild(deleteRecordSpan);
         deleteRecordSpan.appendChild(deleteRecordImg);
     }
+    /**
+     * A method for working with promises
+     * @param {Element} location The element in which we insert the record
+     * @param {Promise} dataFromDtb Data from database
+     * @private
+     */
     _createRecord(location, dataFromDtb) {
         let data = dataFromDtb.then(result => result.forEach(data => {
+            // Editing the string so that we write to page only the date, without the time
             let _newDateStartDrive = data['startDrive'];
             _newDateStartDrive = _newDateStartDrive.substring(0, 10);
+            // Editing the string so that we write to page only the date, without the time
             let _newDateEndDrive = data['startDrive'];
             _newDateEndDrive = _newDateEndDrive.substring(0, 10);
             this._createDOMRecord(location, data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive);
         }));
     }
-    _test() {
+    /**
+     * Method for get data from database
+     * @private
+     */
+    _dataFromDtb() {
         return __awaiter(this, void 0, void 0, function* () {
-            const test = new Data();
-            let x = yield test.getRecordsFromDtb('http://127.0.0.1:3000/tripsheets');
-            return x;
+            const _getData = new Data();
+            let dataFromDtb = yield _getData.getRecordsFromDtb('http://127.0.0.1:3000/tripsheets');
+            return dataFromDtb;
         });
     }
-    showDrivingRecords(locationRecordFilters) {
-        this._createDOMRecordFilter(locationRecordFilters);
+    /**
+     * Method for delete record
+     * @param {Element} record Record we want to delete
+     */
+    deleteRecord(record) {
+        record.remove();
+    }
+    /**
+     * Method for show records
+     * @param {Element} location The element in which we insert the record
+     */
+    showDrivingRecords(location) {
+        this._createDOMRecordFilter(location);
         const _locationRecords = document.querySelector('.records');
-        this._createRecord(_locationRecords, this._test());
+        this._createRecord(_locationRecords, this._dataFromDtb());
     }
 }
