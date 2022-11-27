@@ -25,7 +25,7 @@ const carSchema = new mongoose.Schema({
 const Car = mongoose.model("cars", carSchema);
 const TripSheets = mongoose.model("tripsheets", carSchema);
 
-car1 = new TripSheets({
+/*car1 = new TripSheets({
     driver: 'Pavel Novák',
     car: 'Ford Focus',
     SPZ: '2T4 5463',
@@ -39,7 +39,7 @@ car2 = new TripSheets({
     SPZ: '9B8 7541',
     startDrive: new Date('2022-11-13'),
     endDrive: new Date('2022-11-15'),
-})
+})*/
 
 car1.save()
 car2.save()
