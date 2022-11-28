@@ -15,6 +15,7 @@ mongoose
     .catch(error => console.error("Could not connect to MongoDB... ", error));
 
 const carSchema = new mongoose.Schema({
+    id: Number,
     driver: String,
     car: String,
     SPZ: String,
@@ -22,10 +23,12 @@ const carSchema = new mongoose.Schema({
     endDrive: Date
 });
 
+
 const Car = mongoose.model("cars", carSchema);
 const TripSheets = mongoose.model("tripsheets", carSchema);
 
 /*car1 = new TripSheets({
+    id: 0,
     driver: 'Pavel Novák',
     car: 'Ford Focus',
     SPZ: '2T4 5463',
@@ -34,15 +37,16 @@ const TripSheets = mongoose.model("tripsheets", carSchema);
 })
 
 car2 = new TripSheets({
+    id: 1,
     driver: 'Martin Veselý',
     car: 'Škoda Rapid',
     SPZ: '9B8 7541',
     startDrive: new Date('2022-11-13'),
     endDrive: new Date('2022-11-15'),
-})*/
+})
 
 car1.save()
-car2.save()
+car2.save()*/
 
 app.get('/cars', (req, res) => {
     Car.find().then(cars => {res.json(cars)})
@@ -62,3 +66,14 @@ app.get('/cars/:id', (req, res) => {
 app.get('/tripsheets', (req, res) => {
     TripSheets.find().then(records => {res.json(records)})
 })
+
+app.get('/tripsheets/:id', (req, res) => {
+    const id = req.params.id;
+    TripSheets.find({id: id}, (err, result) => {
+        if (err || !result || result.length === 0){
+            res.status(404).send('Car not found');
+        } else {
+            res.json(result);
+        }
+    })
+});
