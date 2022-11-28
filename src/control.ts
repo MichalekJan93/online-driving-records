@@ -113,3 +113,6 @@ addButtonArrow.forEach(button => {
     })
 })
 
+addDrivingRecords.deleteRecord('1');
+
+

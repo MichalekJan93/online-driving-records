@@ -67,7 +67,7 @@ export class DrivingRecords {
      * @param {String} endDrive End of the ride
      * @private
      */
-    _createDOMRecord(location, driver, car, registrationNumber, startDrive, endDrive) {
+    _createDOMRecord(location, id, driver, car, registrationNumber, startDrive, endDrive) {
         const recordDiv = document.createElement('div');
         const driverDiv = document.createElement('div');
         const carDiv = document.createElement('div');
@@ -77,7 +77,7 @@ export class DrivingRecords {
         const deleteRecordDiv = document.createElement('div');
         const deleteRecordSpan = document.createElement('span');
         const deleteRecordImg = document.createElement('img');
-        recordDiv.setAttribute('class', 'record');
+        recordDiv.setAttribute('class', `record id${id}`);
         driverDiv.setAttribute('class', 'driver');
         carDiv.setAttribute('class', 'car');
         registrationNumberDiv.setAttribute('class', 'registration-number');
@@ -116,7 +116,7 @@ export class DrivingRecords {
             // Editing the string so that we write to page only the date, without the time
             let _newDateEndDrive = data['startDrive'];
             _newDateEndDrive = _newDateEndDrive.substring(0, 10);
-            this._createDOMRecord(location, data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive);
+            this._createDOMRecord(location, data['id'], data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive);
         }));
     }
     /**
@@ -126,7 +126,7 @@ export class DrivingRecords {
     _dataFromDtb() {
         return __awaiter(this, void 0, void 0, function* () {
             const _getData = new Data();
-            let dataFromDtb = yield _getData.getRecordsFromDtb('http://127.0.0.1:3000/tripsheets');
+            let dataFromDtb = yield _getData.getRecordsFromDtb('http://127.0.0.1:3000/tripsheets', 'GET');
             return dataFromDtb;
         });
     }
@@ -134,8 +134,12 @@ export class DrivingRecords {
      * Method for delete record
      * @param {Element} record Record we want to delete
      */
-    deleteRecord(record) {
-        record.remove();
+    deleteRecord(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const _getData = new Data();
+            console.log('delete1');
+            let dataFromDtb = yield _getData.getRecordsFromDtb(`http://127.0.0.1:3000/tripsheets/${id}`, 'DELETE');
+        });
     }
     /**
      * Method for show records

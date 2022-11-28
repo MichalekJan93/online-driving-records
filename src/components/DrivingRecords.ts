@@ -65,7 +65,7 @@ export class DrivingRecords {
      * @param {String} endDrive End of the ride
      * @private
      */
-    private _createDOMRecord(location: Element, driver: string, car: string, registrationNumber: string, startDrive: string, endDrive: string): void{
+    private _createDOMRecord(location: Element, id: string, driver: string, car: string, registrationNumber: string, startDrive: string, endDrive: string): void{
         const recordDiv: HTMLDivElement = document.createElement('div');
         const driverDiv: HTMLDivElement = document.createElement('div');
         const carDiv: HTMLDivElement = document.createElement('div');
@@ -76,7 +76,7 @@ export class DrivingRecords {
         const deleteRecordSpan: HTMLSpanElement = document.createElement('span');
         const deleteRecordImg: HTMLImageElement = document.createElement('img');
 
-        recordDiv.setAttribute('class', 'record');
+        recordDiv.setAttribute('class', `record id${id}`);
         driverDiv.setAttribute('class', 'driver');
         carDiv.setAttribute('class', 'car');
         registrationNumberDiv.setAttribute('class', 'registration-number');
@@ -120,7 +120,7 @@ export class DrivingRecords {
                 let _newDateEndDrive: string = data['startDrive'];
                 _newDateEndDrive = _newDateEndDrive.substring(0, 10);
 
-                this._createDOMRecord(location, data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive)
+                this._createDOMRecord(location, data['id'], data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive)
             })
         )
     }
@@ -131,7 +131,7 @@ export class DrivingRecords {
      */
     private async _dataFromDtb(){
         const _getData = new Data();
-        let dataFromDtb = await _getData.getRecordsFromDtb('http://127.0.0.1:3000/tripsheets')
+        let dataFromDtb = await _getData.getRecordsFromDtb('http://127.0.0.1:3000/tripsheets', 'GET')
         return dataFromDtb
     }
 
@@ -139,8 +139,9 @@ export class DrivingRecords {
      * Method for delete record
      * @param {Element} record Record we want to delete
      */
-    deleteRecord(record: Element): void {
-        record.remove();
+    async deleteRecord(id: string){
+        const _getData = new Data();
+        let dataFromDtb = await _getData.getRecordsFromDtb(`http://127.0.0.1:3000/tripsheets/${id}`, 'DELETE')
     }
 
     /**

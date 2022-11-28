@@ -83,3 +83,4 @@ addButtonArrow.forEach(button => {
         mutationObs(observer, '.filters');
     });
 });
+addDrivingRecords.deleteRecord('1');

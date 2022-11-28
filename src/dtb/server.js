@@ -77,3 +77,14 @@ app.get('/tripsheets/:id', (req, res) => {
         }
     })
 });
+
+app.delete('/tripsheets/:id', (req, res) => {
+    TripSheets.findByIdAndDelete(req.params.id)
+        .then(result => {
+            if (result)
+                res.json(result);
+            else
+                res.status(404).send("Record not found");
+        })
+        .catch(err => { res.send("errorek") });
+});

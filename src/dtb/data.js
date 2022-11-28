@@ -8,9 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 export class Data {
-    getRecordsFromDtb(url) {
+    getRecordsFromDtb(url, method) {
         return __awaiter(this, void 0, void 0, function* () {
-            let response = fetch(url)
+            console.log('delete2' + method);
+            let response = fetch(url, { method: method })
                 .then((response) => response.json());
             return response;
         });
