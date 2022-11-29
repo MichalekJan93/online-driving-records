@@ -11,7 +11,6 @@ import { Data } from "../dtb/data.js";
 /**
  * Class for creating a driving record
  * Class for removing a driving record
- *
  */
 export class DrivingRecords {
     /**
@@ -131,6 +130,10 @@ export class DrivingRecords {
             return dataFromDtb;
         });
     }
+    /**
+     * The method removes all records from the page
+     * @private
+     */
     _deleteAllRecords() {
         const _records = document.querySelectorAll('.record');
         for (let i = 0; i < _records.length; i++) {
@@ -139,7 +142,10 @@ export class DrivingRecords {
         }
     }
     /**
-     *
+     * A method to delete a record
+     * The method calls the getRecords method to remove the record from the database, then removes all records from the page and writes the current records from the database again.
+     * @param id {string} ID of the record we want to delete
+     * @param location {element} The location where we want to write new current records
      */
     deleteRecord(id, location) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -150,7 +156,8 @@ export class DrivingRecords {
         });
     }
     /**
-     *
+     * The method displays the entries to the page
+     * @param location The location where we want to write new current records
      */
     showDrivingRecords(location) {
         this._createDOMRecordFilter(location);

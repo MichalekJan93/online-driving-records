@@ -1,7 +1,9 @@
 import { Calendar } from "./components/Calendar.js";
 import { AddRecords } from "./components/AddRecords.js";
 import { DrivingRecords } from "./components/DrivingRecords.js";
+import { Message } from "./components/Message.js";
 const calendar = new Calendar();
+let message = new Message();
 let select;
 function markingDate() {
     let daysInCalendar = document.querySelectorAll('.this-month');
@@ -87,8 +89,17 @@ const observer = new MutationObserver(MutationRecord => {
     const deleteRecordButtons = document.querySelectorAll('.delete-this-record');
     deleteRecordButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const location = document.querySelector('.records');
-            addDrivingRecords.deleteRecord(btn['id'], location);
+            const messageDialog = message.showDialog('Are you sure you want to delete the record?');
+            const confirmButton = document.querySelector('.confirm-message');
+            const cancelButton = document.querySelector('.cancel-message');
+            confirmButton.addEventListener('click', () => {
+                message.deleteDialog(messageDialog);
+                const location = document.querySelector('.records');
+                addDrivingRecords.deleteRecord(btn['id'], location);
+            });
+            cancelButton.addEventListener('click', () => {
+                message.deleteDialog(messageDialog);
+            });
         });
     });
 });
