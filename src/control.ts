@@ -19,15 +19,12 @@ function confirmDateSelection(): void{
     const btn: HTMLButtonElement = document.querySelector('.confirm');
 
     btn.addEventListener('click', () => {
-        console.log(select);
         calendar.deleteCalendar();
     })
 }
 
 function mutationObs (observer, target: string): void {
-    console.log('target: ' + target);
     const targetNode: Node = document.querySelector(`${target}`);
-    console.log('node: ' + targetNode);
 
     observer.observe(targetNode, {
         childList: true,
@@ -96,7 +93,7 @@ addButtonCalendar.forEach(button => {
 })
 
 /*Zobrazeni vyberu*/
-const addButtonArrow = document.querySelectorAll('.img-arrow');
+const addButtonArrow: NodeList = document.querySelectorAll('.img-arrow');
 
 addButtonArrow.forEach(button => {
     button.addEventListener('click', () => {
@@ -113,6 +110,22 @@ addButtonArrow.forEach(button => {
     })
 })
 
-addDrivingRecords.deleteRecord('1');
+/**
+ * Odstraneni zaznamu
+ */
+
+
+
+const observer = new MutationObserver(MutationRecord =>{
+    const deleteRecordButtons: NodeList = document.querySelectorAll('.delete-this-record');
+    deleteRecordButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const location = document.querySelector('.records');
+            addDrivingRecords.deleteRecord(btn['id'], location)
+        })
+    })
+});
+
+mutationObs(observer,'.content');
 
 

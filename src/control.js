@@ -14,14 +14,11 @@ function markingDate() {
 function confirmDateSelection() {
     const btn = document.querySelector('.confirm');
     btn.addEventListener('click', () => {
-        console.log(select);
         calendar.deleteCalendar();
     });
 }
 function mutationObs(observer, target) {
-    console.log('target: ' + target);
     const targetNode = document.querySelector(`${target}`);
-    console.log('node: ' + targetNode);
     observer.observe(targetNode, {
         childList: true,
         subtree: true,
@@ -83,4 +80,16 @@ addButtonArrow.forEach(button => {
         mutationObs(observer, '.filters');
     });
 });
-addDrivingRecords.deleteRecord('1');
+/**
+ * Odstraneni zaznamu
+ */
+const observer = new MutationObserver(MutationRecord => {
+    const deleteRecordButtons = document.querySelectorAll('.delete-this-record');
+    deleteRecordButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const location = document.querySelector('.records');
+            addDrivingRecords.deleteRecord(btn['id'], location);
+        });
+    });
+});
+mutationObs(observer, '.content');

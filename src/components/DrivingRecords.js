@@ -77,7 +77,7 @@ export class DrivingRecords {
         const deleteRecordDiv = document.createElement('div');
         const deleteRecordSpan = document.createElement('span');
         const deleteRecordImg = document.createElement('img');
-        recordDiv.setAttribute('class', `record id${id}`);
+        recordDiv.setAttribute('class', `record`);
         driverDiv.setAttribute('class', 'driver');
         carDiv.setAttribute('class', 'car');
         registrationNumberDiv.setAttribute('class', 'registration-number');
@@ -85,6 +85,7 @@ export class DrivingRecords {
         endDriveDiv.setAttribute('class', 'end-drive');
         deleteRecordDiv.setAttribute('class', 'delete-record');
         deleteRecordSpan.setAttribute('class', 'delete-this-record');
+        deleteRecordSpan.setAttribute('id', `${id}`);
         deleteRecordImg.setAttribute('src', './img/cross.png');
         deleteRecordImg.setAttribute('alt', 'Company car');
         driverDiv.innerText = driver;
@@ -116,7 +117,7 @@ export class DrivingRecords {
             // Editing the string so that we write to page only the date, without the time
             let _newDateEndDrive = data['startDrive'];
             _newDateEndDrive = _newDateEndDrive.substring(0, 10);
-            this._createDOMRecord(location, data['id'], data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive);
+            this._createDOMRecord(location, data['_id'], data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive);
         }));
     }
     /**
@@ -130,20 +131,26 @@ export class DrivingRecords {
             return dataFromDtb;
         });
     }
+    _deleteAllRecords() {
+        const _records = document.querySelectorAll('.record');
+        for (let i = 0; i < _records.length; i++) {
+            const record = _records[i];
+            record.parentNode.removeChild(record);
+        }
+    }
     /**
-     * Method for delete record
-     * @param {Element} record Record we want to delete
+     *
      */
-    deleteRecord(id) {
+    deleteRecord(id, location) {
         return __awaiter(this, void 0, void 0, function* () {
             const _getData = new Data();
-            console.log('delete1');
             let dataFromDtb = yield _getData.getRecordsFromDtb(`http://127.0.0.1:3000/tripsheets/${id}`, 'DELETE');
+            this._deleteAllRecords();
+            this._createRecord(location, this._dataFromDtb());
         });
     }
     /**
-     * Method for show records
-     * @param {Element} location The element in which we insert the record
+     *
      */
     showDrivingRecords(location) {
         this._createDOMRecordFilter(location);

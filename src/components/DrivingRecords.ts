@@ -3,7 +3,6 @@ import {Data} from "../dtb/data.js";
 /**
  * Class for creating a driving record
  * Class for removing a driving record
- *
  */
 export class DrivingRecords {
 
@@ -76,7 +75,7 @@ export class DrivingRecords {
         const deleteRecordSpan: HTMLSpanElement = document.createElement('span');
         const deleteRecordImg: HTMLImageElement = document.createElement('img');
 
-        recordDiv.setAttribute('class', `record id${id}`);
+        recordDiv.setAttribute('class', `record`);
         driverDiv.setAttribute('class', 'driver');
         carDiv.setAttribute('class', 'car');
         registrationNumberDiv.setAttribute('class', 'registration-number');
@@ -84,6 +83,7 @@ export class DrivingRecords {
         endDriveDiv.setAttribute('class', 'end-drive');
         deleteRecordDiv.setAttribute('class', 'delete-record');
         deleteRecordSpan.setAttribute('class', 'delete-this-record');
+        deleteRecordSpan.setAttribute('id', `${id}`);
         deleteRecordImg.setAttribute('src', './img/cross.png');
         deleteRecordImg.setAttribute('alt', 'Company car');
 
@@ -120,7 +120,7 @@ export class DrivingRecords {
                 let _newDateEndDrive: string = data['startDrive'];
                 _newDateEndDrive = _newDateEndDrive.substring(0, 10);
 
-                this._createDOMRecord(location, data['id'], data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive)
+                this._createDOMRecord(location, data['_id'], data['driver'], data['car'], data['SPZ'], _newDateStartDrive, _newDateEndDrive)
             })
         )
     }
@@ -136,17 +136,33 @@ export class DrivingRecords {
     }
 
     /**
-     * Method for delete record
-     * @param {Element} record Record we want to delete
+     * The method removes all records from the page
+     * @private
      */
-    async deleteRecord(id: string){
-        const _getData = new Data();
-        let dataFromDtb = await _getData.getRecordsFromDtb(`http://127.0.0.1:3000/tripsheets/${id}`, 'DELETE')
+    private _deleteAllRecords(): void{
+        const _records: NodeList = document.querySelectorAll('.record');
+        for(let i = 0; i < _records.length; i++){
+            const record: Node = _records[i];
+            record.parentNode.removeChild(record);
+        }
     }
 
     /**
-     * Method for show records
-     * @param {Element} location The element in which we insert the record
+     * A method to delete a record
+     * The method calls the getRecords method to remove the record from the database, then removes all records from the page and writes the current records from the database again.
+     * @param id {string} ID of the record we want to delete
+     * @param location {element} The location where we want to write new current records
+     */
+    async deleteRecord(id: string, location: Element){
+        const _getData = new Data();
+        let dataFromDtb = await _getData.getRecordsFromDtb(`http://127.0.0.1:3000/tripsheets/${id}`, 'DELETE');
+        this._deleteAllRecords();
+        this._createRecord(location ,this._dataFromDtb());
+    }
+
+    /**
+     * The method displays the entries to the page
+     * @param location The location where we want to write new current records
      */
     showDrivingRecords(location: Element): void{
         this._createDOMRecordFilter(location);
