@@ -1,4 +1,49 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"); /* COLORS */
+/* COLORS */
+.message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
+  border-radius: 5px;
+  border: none;
+  animation: fade-out 400ms;
+}
+@keyframes fade-out {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.message .bottom-box {
+  display: flex;
+  justify-content: space-between;
+}
+.message .bottom-box button {
+  margin-top: 2rem;
+  width: 48%;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.message .bottom-box button:hover {
+  box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
+}
+.message .bottom-box .confirm {
+  background-color: #54A0FF;
+  color: white;
+}
+.message .bottom-box .cancel {
+  background-color: #EE5353;
+  color: white;
+}
+
 .content {
   margin-top: 2rem;
 }
