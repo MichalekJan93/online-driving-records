@@ -16,7 +16,9 @@
 
   .top-box{
 
-    p{}
+    p{
+      font-size: 1.1rem;
+    }
 
   }
 
@@ -32,17 +34,29 @@
       border: none;
       cursor: pointer;
 
+      &:focus-visible {
+        outline: none;
+        border: none;
+      }
+
       &:hover{
         box-shadow: $shadow;
       }
     }
 
-    .confirm{
-      background-color: $mainColor;
-      color: white;
+
+
+    .confirm-message{
+      background-color: $background-color;
+      color: black;
+
+      &:hover{
+        background-color: $mainColor;
+        color: white;
+      }
     }
 
-    .cancel{
+    .cancel-message{
       background-color: $error-color;
       color: white;
     }

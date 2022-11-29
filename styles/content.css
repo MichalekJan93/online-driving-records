@@ -20,6 +20,9 @@
     opacity: 1;
   }
 }
+.message .top-box p {
+  font-size: 1.1rem;
+}
 .message .bottom-box {
   display: flex;
   justify-content: space-between;
@@ -32,14 +35,22 @@
   border: none;
   cursor: pointer;
 }
+.message .bottom-box button:focus-visible {
+  outline: none;
+  border: none;
+}
 .message .bottom-box button:hover {
   box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
 }
-.message .bottom-box .confirm {
+.message .bottom-box .confirm-message {
+  background-color: #ebf4ff;
+  color: black;
+}
+.message .bottom-box .confirm-message:hover {
   background-color: #54A0FF;
   color: white;
 }
-.message .bottom-box .cancel {
+.message .bottom-box .cancel-message {
   background-color: #EE5353;
   color: white;
 }
@@ -208,6 +219,7 @@
   border-radius: 50%;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .content .records .record .delete-record span img {
   width: 10px;
