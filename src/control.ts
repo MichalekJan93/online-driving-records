@@ -1,39 +1,9 @@
-import {Calendar} from "./components/Calendar.js";
 import {AddRecords} from "./components/AddRecords.js";
 import {DrivingRecords} from "./components/DrivingRecords.js";
 import {Message} from "./components/Message.js";
+import {mutationObs} from "./controls/Mutation.js";
 
-const calendar = new Calendar();
 let message = new Message();
-let select: string[];
-
-function markingDate(): void{
-    let daysInCalendar: NodeList = document.querySelectorAll('.this-month');
-
-    daysInCalendar.forEach(selectDay => {
-        selectDay.addEventListener('click', () => {
-            select = calendar.selecetDayInCalendar(selectDay);
-        })
-    })
-}
-
-function confirmDateSelection(): void{
-    const btn: HTMLButtonElement = document.querySelector('.confirm');
-
-    btn.addEventListener('click', () => {
-        calendar.deleteCalendar();
-    })
-}
-
-function mutationObs (observer, target: string): void {
-    const targetNode: Node = document.querySelector(`${target}`);
-
-    observer.observe(targetNode, {
-        childList: true,
-        subtree: true,
-        characterDataOldValue: true
-    });
-}
 
 /*Test vlozeni form pro pridani*/
 
@@ -46,22 +16,15 @@ const addDrivingRecords = new DrivingRecords();
 
 addDrivingRecords.showDrivingRecords(content);
 
-/*let addRecords = document.querySelectorAll('.img-add-record');
-
-addRecords.forEach(icon => {
-    icon.addEventListener('click', (event) => {
-        console.log(event['layerX'], event['layerY']);
-    })
-})*/
-
 /*Animace zobrazeni inputu pro pridani zaznamu*/
-const showControls = document.querySelector('.show-records');
-const filters = document.querySelectorAll('.filters');
+const showControl: HTMLImageElement= document.querySelector('.show-records');
+const filters: NodeList = document.querySelectorAll('.filters');
 
-showControls.addEventListener('click', () => {
-    const addRecord = document.querySelector('.add-record');
-    // @ts-ignore
+showControl.addEventListener('click', () => {
+    const addRecord: HTMLDivElement = document.querySelector('.add-record');
+
     addRecord.style.display = 'block';
+    showControl.style.transform = 'rotate(270deg)'
 
     function interval(){
         filters.forEach(filter => {
@@ -71,27 +34,6 @@ showControls.addEventListener('click', () => {
     }
 
     const myTemiout = setTimeout(interval, 300);
-})
-
-/*Zobrazeni kalendare*/
-const addButtonCalendar = document.querySelectorAll('.img-calendar');
-
-addButtonCalendar.forEach(button => {
-    button.addEventListener('click', () => {
-        const location: Element= button.parentElement.lastElementChild;
-
-        calendar.createCalendar(location);
-
-        markingDate();
-        confirmDateSelection();
-
-        const observer = new MutationObserver(MutationRecord =>{
-            markingDate();
-        });
-
-        mutationObs(observer,'.days');
-
-    })
 })
 
 /*Zobrazeni vyberu*/
@@ -104,19 +46,13 @@ addButtonArrow.forEach(button => {
         location.style.display = 'block';
 
         const observer = new MutationObserver(MutationRecord =>{
-            markingDate();
+            /*markingDate();*/
         });
 
         mutationObs(observer,'.filters');
 
     })
 })
-
-/**
- * Odstraneni zaznamu
- */
-
-
 
 const observer = new MutationObserver(MutationRecord =>{
     const deleteRecordButtons: NodeList = document.querySelectorAll('.delete-this-record');

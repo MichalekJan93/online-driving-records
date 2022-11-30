@@ -169,13 +169,13 @@ export class Calendar {
          * @param selectedDay Selected date
          * @returns {string[]} The complete date selected by the user
          */
-        this.selecetDayInCalendar = (selectedDay) => {
+        this.selectDayInCalendar = (selectedDay) => {
             let daysInCalendar = document.querySelectorAll('.this-month');
-            let _selecetDay = [];
+            let _selectDay = [];
             let actuallyMonthAndYear = `${this._currentMonth} ${this._currentYear}`;
             let newArray = actuallyMonthAndYear.split(" ");
             for (let i = 0; i < newArray.length; i++) {
-                _selecetDay.push(newArray[i]);
+                _selectDay.push(newArray[i]);
             }
             daysInCalendar.forEach(day => {
                 // @ts-ignore
@@ -185,10 +185,10 @@ export class Calendar {
                 }
             });
             let day = selectedDay['id'].substring(3, selectedDay['id'].length);
-            _selecetDay.push(day);
+            _selectDay.push(day);
             // @ts-ignore
             selectedDay.classList.add('selected-day');
-            return _selecetDay;
+            return _selectDay;
         };
         /**
          * A method to capture clicks on the cancel button
