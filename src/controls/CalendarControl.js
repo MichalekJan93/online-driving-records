@@ -11,12 +11,15 @@ function markingDate() {
     });
 }
 function inputSelectedDate(date, location) {
-    const newMonth = parseInt(date[0]) + 1;
     if (parseInt(date[2]) < 10) {
         date[2] = '0' + date[2];
     }
-    if (newMonth < 10) {
-        date[0] = '0' + newMonth.toString();
+    const month = parseInt(date[0]) + 1;
+    if (month < 10) {
+        date[0] = '0' + month.toString();
+    }
+    else {
+        date[0] = month.toString();
     }
     const selectedDate = `${date[1]}-${date[0]}-${date[2]}`;
     // @ts-ignore

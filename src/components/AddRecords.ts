@@ -88,7 +88,7 @@ export class AddRecords {
                     const addBtn: HTMLButtonElement = document.createElement('button');
                     addBtn.setAttribute('class', 'add-record-button');
 
-                    addBtn.innerText = 'Přidat záznam';
+                    addBtn.innerText = 'Add Record';
 
                     inputFiltersDiv.appendChild(addBtn);
                 }

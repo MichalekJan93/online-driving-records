@@ -21,8 +21,12 @@ function inputSelectedDate(date: string[], location: Node): void {
     }
 
     const month: number = parseInt(date[0]) + 1;
+
     if(month < 10){
         date[0] = '0' + month.toString();
+    }
+    else{
+        date[0] = month.toString();
     }
 
     const selectedDate = `${date[1]}-${date[0]}-${date[2]}`;
