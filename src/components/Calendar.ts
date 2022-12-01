@@ -110,11 +110,22 @@ export class Calendar {
      * @private
      */
     private _firstDayOfMonth = (): number => {
-        return new Date(this._currentYear, this._currentMonth,1).getDay();
+        const firstDay: number = new Date(this._currentYear, this._currentMonth,1).getDay();
+        // If we get 0 in firstDay as the index of the day in week 0, then we store 7 in firstDay, because the week starts on Monday and ends on Sunday
+        if(firstDay === 0){
+            return 7;
+        } else {
+            return firstDay;
+        }
     }
 
+    /**
+     * Method for finding the last day of the month
+     * @returns {number} last day of the month
+     * @private
+     */
     private _lastDayOfMonth = (): number => {
-        return new Date(this._currentYear, this._currentMonth, this._lastDateOfMonth()).getDay();
+        return new Date(this._currentYear, this._currentMonth, this._lastDateOfMonth()).getDay() + 1;
     }
 
     /**
@@ -164,10 +175,11 @@ export class Calendar {
             daysDiv.appendChild(numberOfDayParagraph);
         }
 
-        for (let i = this._lastDayOfMonth(); i < 6; i++){
+        // Cycle for inserting days from the next month into the calendar
+        for (let i = this._lastDayOfMonth(); i <= 7 && i != 1; i++){
             let numberOfDayParagraph: HTMLElement = document.createElement('p');
             numberOfDayParagraph.setAttribute('class', `last-day day${i - this._lastDateOfLastMonth() + 1}`)
-            numberOfDayParagraph.innerHTML = String(this._lastDateOfLastMonth() - i + 2);
+            numberOfDayParagraph.innerHTML = String(i - this._lastDayOfMonth() + 1);
             daysDiv.appendChild(numberOfDayParagraph);
         }
     }
