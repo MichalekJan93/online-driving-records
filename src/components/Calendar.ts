@@ -89,9 +89,9 @@ export class Calendar {
         divConfirmation.appendChild(buttonConfirm);
 
         for(let i = 0; i < this._nameOfDay.length; i++){
-            const paragraphNameofDay: HTMLParagraphElement = document.createElement('p');
-            paragraphNameofDay.innerText = this._nameOfDay[i];
-            divWeekend.appendChild(paragraphNameofDay);
+            const paragraphNameOfDay: HTMLParagraphElement = document.createElement('p');
+            paragraphNameOfDay.innerText = this._nameOfDay[i];
+            divWeekend.appendChild(paragraphNameOfDay);
         }
     }
 
@@ -111,6 +111,10 @@ export class Calendar {
      */
     private _firstDayOfMonth = (): number => {
         return new Date(this._currentYear, this._currentMonth,1).getDay();
+    }
+
+    private _lastDayOfMonth = (): number => {
+        return new Date(this._currentYear, this._currentMonth, this._lastDateOfMonth()).getDay();
     }
 
     /**
@@ -157,6 +161,13 @@ export class Calendar {
             numberOfDayParagraph.setAttribute('id', `day${i}`)
             numberOfDayParagraph.innerHTML = String(i);
 
+            daysDiv.appendChild(numberOfDayParagraph);
+        }
+
+        for (let i = this._lastDayOfMonth(); i < 6; i++){
+            let numberOfDayParagraph: HTMLElement = document.createElement('p');
+            numberOfDayParagraph.setAttribute('class', `last-day day${i - this._lastDateOfLastMonth() + 1}`)
+            numberOfDayParagraph.innerHTML = String(this._lastDateOfLastMonth() - i + 2);
             daysDiv.appendChild(numberOfDayParagraph);
         }
     }

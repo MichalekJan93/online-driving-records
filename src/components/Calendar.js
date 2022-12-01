@@ -79,9 +79,9 @@ export class Calendar {
             divConfirmation.appendChild(buttonCancel);
             divConfirmation.appendChild(buttonConfirm);
             for (let i = 0; i < this._nameOfDay.length; i++) {
-                const paragraphNameofDay = document.createElement('p');
-                paragraphNameofDay.innerText = this._nameOfDay[i];
-                divWeekend.appendChild(paragraphNameofDay);
+                const paragraphNameOfDay = document.createElement('p');
+                paragraphNameOfDay.innerText = this._nameOfDay[i];
+                divWeekend.appendChild(paragraphNameOfDay);
             }
         };
         /**
@@ -99,6 +99,11 @@ export class Calendar {
          */
         this._firstDayOfMonth = () => {
             return new Date(this._currentYear, this._currentMonth, 1).getDay();
+        };
+
+        this._lastDayOfMonth = () => {
+            console.log('year: ' + this._currentYear + 'month: ' + this._currentMonth + 'day: ' + this._lastDateOfMonth())
+            return new Date(this._currentYear, this._currentMonth, this._lastDateOfMonth()).getDay();
         };
         /**
          * A method to find the last day in the previous month
@@ -124,6 +129,8 @@ export class Calendar {
         this._daysInCalendar = () => {
             const daysDiv = document.querySelector('.days');
             daysDiv.innerHTML = '';
+
+            console.log(this._lastDayOfMonth());
             // A cycle for inserting days from the previous month into the calendar
             for (let i = this._firstDayOfMonth(); i > 1; i--) {
                 let numberOfDayParagraph = document.createElement('p');
@@ -131,6 +138,8 @@ export class Calendar {
                 numberOfDayParagraph.innerHTML = String(this._lastDateOfLastMonth() - i + 2);
                 daysDiv.appendChild(numberOfDayParagraph);
             }
+
+            console.log(this._lastDayOfMonth());
             // Cycle for inserting days from the selected month into the calendar
             for (let i = 1; i <= this._lastDateOfMonth(); i++) {
                 let isToday = i === this._date.getDate() && this._currentMonth === new Date().getMonth()
@@ -139,6 +148,18 @@ export class Calendar {
                 numberOfDayParagraph.setAttribute('class', `${isToday}`);
                 numberOfDayParagraph.setAttribute('id', `day${i}`);
                 numberOfDayParagraph.innerHTML = String(i);
+                daysDiv.appendChild(numberOfDayParagraph);
+            }
+
+            console.log(this._lastDayOfMonth());
+            for (let i = this._lastDayOfMonth(); i < 6; i++) {
+                if(i === 0){
+                    break;
+                }
+
+                let numberOfDayParagraph = document.createElement('p');
+                numberOfDayParagraph.setAttribute('class', `last-day day${i - this._lastDayOfMonth() + 1}`);
+                numberOfDayParagraph.innerHTML = String(i - this._lastDayOfMonth() + 1);
                 daysDiv.appendChild(numberOfDayParagraph);
             }
         };

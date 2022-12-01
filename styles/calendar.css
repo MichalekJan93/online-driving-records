@@ -78,11 +78,11 @@
 .calendar .days p:hover {
   box-shadow: 0px 0px 5px 0px rgb(189, 189, 189);
 }
-.calendar .days .last-month {
+.calendar .days .last-month, .calendar .days .last-day {
   color: #C8D6E5;
   cursor: default;
 }
-.calendar .days .last-month:hover {
+.calendar .days .last-month:hover, .calendar .days .last-day:hover {
   box-shadow: none;
 }
 .calendar .days .today {
