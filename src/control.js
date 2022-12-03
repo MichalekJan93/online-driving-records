@@ -2,6 +2,7 @@ import { AddRecords } from "./components/AddRecords.js";
 import { DrivingRecords } from "./components/DrivingRecords.js";
 import { Message } from "./components/Message.js";
 import { mutationObs } from "./controls/Mutation.js";
+import { InputDriver } from "./controls/InputDriver.js";
 let message = new Message();
 /*Test vlozeni form pro pridani*/
 const content = document.querySelector('.content');
@@ -25,12 +26,14 @@ showControl.addEventListener('click', () => {
     const myTemiout = setTimeout(interval, 300);
 });
 /*Zobrazeni vyberu*/
+/*Ovladani arrow input*/
 const addButtonArrow = document.querySelectorAll('.img-arrow');
+const inputDriver = new InputDriver();
 addButtonArrow.forEach(button => {
     button.addEventListener('click', () => {
         const location = button.parentElement.lastElementChild;
-        // @ts-ignore
-        location.style.display = 'block';
+        addRecord.showDiv(location);
+        inputDriver.showingRecords(location);
         const observer = new MutationObserver(MutationRecord => {
             /*markingDate();*/
         });

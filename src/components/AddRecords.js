@@ -84,6 +84,12 @@ export class AddRecords {
             }
         }
     }
+    showDiv(location) {
+        location.style.display = 'block';
+    }
+    deleteDiv(location) {
+        location.style.display = 'none';
+    }
     /**
      * Method for show filters
      * @param {Element} location The element in which we insert the record

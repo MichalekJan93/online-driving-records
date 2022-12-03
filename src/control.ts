@@ -2,6 +2,7 @@ import {AddRecords} from "./components/AddRecords.js";
 import {DrivingRecords} from "./components/DrivingRecords.js";
 import {Message} from "./components/Message.js";
 import {mutationObs} from "./controls/Mutation.js";
+import {InputDriver} from "./controls/InputDriver.js";
 
 let message = new Message();
 
@@ -37,13 +38,14 @@ showControl.addEventListener('click', () => {
 })
 
 /*Zobrazeni vyberu*/
+/*Ovladani arrow input*/
 const addButtonArrow: NodeList = document.querySelectorAll('.img-arrow');
-
+const inputDriver = new InputDriver();
 addButtonArrow.forEach(button => {
     button.addEventListener('click', () => {
-        const location: Element= button.parentElement.lastElementChild;
-        // @ts-ignore
-        location.style.display = 'block';
+        const location = button.parentElement.lastElementChild as HTMLDivElement;
+        addRecord.showDiv(location);
+        inputDriver.showingRecords(location);
 
         const observer = new MutationObserver(MutationRecord =>{
             /*markingDate();*/

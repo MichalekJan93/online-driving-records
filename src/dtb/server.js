@@ -15,7 +15,6 @@ mongoose
     .catch(error => console.error("Could not connect to MongoDB... ", error));
 
 const carSchema = new mongoose.Schema({
-    id: Number,
     driver: String,
     car: String,
     SPZ: String,
@@ -23,27 +22,26 @@ const carSchema = new mongoose.Schema({
     endDrive: Date
 });
 
+const driverSchema = new mongoose.Schema({
+    name: String,
+    sureName: String,
+})
+
 
 const Car = mongoose.model("cars", carSchema);
 const TripSheets = mongoose.model("tripsheets", carSchema);
+const Driver = mongoose.model("drivers", driverSchema);
 
-/*car1 = new TripSheets({
-    id: 0,
-    driver: 'Pavel Novák',
-    car: 'Ford Focus',
-    SPZ: '2T4 5463',
-    startDrive: new Date('2022-11-12'),
-    endDrive: new Date('2022-11-12'),
+/*car1 = new Driver({
+    name: 'Pavel',
+    sureName: 'Novák'
 })
 
-car2 = new TripSheets({
-    id: 1,
-    driver: 'Martin Veselý',
-    car: 'Škoda Rapid',
-    SPZ: '9B8 7541',
-    startDrive: new Date('2022-11-13'),
-    endDrive: new Date('2022-11-15'),
+car2 = new Driver({
+    name: 'Martin',
+    sureName: 'Veselý'
 })
+
 
 car1.save()
 car2.save()*/
@@ -88,3 +86,7 @@ app.delete('/tripsheets/:id', (req, res) => {
         })
         .catch(err => { res.send("errorek") });
 });
+
+app.get('/drivers', (req, res) => {
+    Driver.find().then(cars => {res.json(cars)})
+})

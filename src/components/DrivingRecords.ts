@@ -129,7 +129,7 @@ export class DrivingRecords {
      * Method for get data from database
      * @private
      */
-    private async _dataFromDtb(){
+    private async _dataFromDtb(): Promise<[]>{
         const _getData = new Data();
         let dataFromDtb = await _getData.getRecordsFromDtb('http://127.0.0.1:3000/tripsheets', 'GET')
         return dataFromDtb
