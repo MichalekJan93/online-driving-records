@@ -36,6 +36,7 @@ export class Calendar {
          * @private
          */
         this._createCalendar = (location) => {
+            this.deleteCalendar();
             const divCalendar = document.createElement('div');
             const divDate = document.createElement('div');
             const divWeekend = document.createElement('div');
@@ -99,6 +100,7 @@ export class Calendar {
          */
         this._firstDayOfMonth = () => {
             const firstDay = new Date(this._currentYear, this._currentMonth, 1).getDay();
+            // If we get 0 in firstDay as the index of the day in week 0, then we store 7 in firstDay, because the week starts on Monday and ends on Sunday
             if (firstDay === 0) {
                 return 7;
             }
@@ -106,6 +108,11 @@ export class Calendar {
                 return firstDay;
             }
         };
+        /**
+         * Method for finding the last day of the month
+         * @returns {number} last day of the month
+         * @private
+         */
         this._lastDayOfMonth = () => {
             return new Date(this._currentYear, this._currentMonth, this._lastDateOfMonth()).getDay() + 1;
         };
@@ -150,6 +157,7 @@ export class Calendar {
                 numberOfDayParagraph.innerHTML = String(i);
                 daysDiv.appendChild(numberOfDayParagraph);
             }
+            // Cycle for inserting days from the next month into the calendar
             for (let i = this._lastDayOfMonth(); i <= 7 && i != 1; i++) {
                 let numberOfDayParagraph = document.createElement('p');
                 numberOfDayParagraph.setAttribute('class', `last-day day${i - this._lastDateOfLastMonth() + 1}`);
@@ -221,7 +229,9 @@ export class Calendar {
          */
         this.deleteCalendar = () => {
             const _calendar = document.querySelector('.calendar');
-            _calendar.remove();
+            if (_calendar != undefined) {
+                _calendar.remove();
+            }
         };
         /**
          * The method starts the necessary methods to display and control the calendar

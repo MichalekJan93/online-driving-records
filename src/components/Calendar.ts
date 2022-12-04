@@ -39,6 +39,7 @@ export class Calendar {
      * @private
      */
     private _createCalendar = (location: Element): void => {
+        this.deleteCalendar();
         const divCalendar:HTMLDivElement  = document.createElement('div');
         const divDate:HTMLDivElement  = document.createElement('div');
         const divWeekend:HTMLDivElement  = document.createElement('div');
@@ -262,7 +263,9 @@ export class Calendar {
      */
     deleteCalendar = (): void => {
         const _calendar = document.querySelector('.calendar');
-        _calendar.remove();
+        if(_calendar != undefined){
+            _calendar.remove();
+        }
     }
 
     /**
