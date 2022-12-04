@@ -94,6 +94,8 @@
           max-height: 100px;
           overflow: auto;
           display: none;
+          @include animate(fade-out, 400ms);
+          @include keyFrameShow;
 
           .drivers-driver{
             cursor: pointer;

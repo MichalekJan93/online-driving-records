@@ -151,6 +151,15 @@
   max-height: 100px;
   overflow: auto;
   display: none;
+  animation: fade-out 400ms;
+}
+@keyframes fade-out {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .content .add-record .filters .input-filter .input-driver-drivers .drivers-driver {
   cursor: pointer;

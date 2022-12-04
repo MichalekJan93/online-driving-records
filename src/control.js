@@ -14,8 +14,8 @@ addDrivingRecords.showDrivingRecords(content);
 const showControl = document.querySelector('.show-records');
 const filters = document.querySelectorAll('.filters');
 showControl.addEventListener('click', () => {
-    const addRecord = document.querySelector('.add-record');
-    addRecord.style.display = 'block';
+    const addRecords = document.querySelector('.add-record');
+    addRecords.style.display = 'block';
     showControl.style.transform = 'rotate(270deg)';
     function interval() {
         filters.forEach(filter => {
@@ -32,10 +32,12 @@ const inputDriver = new InputDriver();
 addButtonArrow.forEach(button => {
     button.addEventListener('click', () => {
         const location = button.parentElement.lastElementChild;
-        addRecord.showDiv(location);
         inputDriver.showingRecords(location);
+        inputDriver.deleteRecords(location);
+        addRecord.showDiv(location);
         const observer = new MutationObserver(MutationRecord => {
-            /*markingDate();*/
+            const _loc = button.parentElement.childNodes[1];
+            inputDriver.selectDriver(_loc, location);
         });
         mutationObs(observer, '.filters');
     });

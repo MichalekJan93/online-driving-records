@@ -11,6 +11,7 @@ import { Data } from "../dtb/data.js";
 export class InputDriver {
     _createDOM(location, record) {
         const driversParagraph = document.createElement('p');
+        driversParagraph.setAttribute('class', 'drivers-driver');
         driversParagraph.innerHTML = record;
         location.appendChild(driversParagraph);
     }
@@ -26,6 +27,27 @@ export class InputDriver {
             let dataFromDtb = yield _getData.getRecordsFromDtb(`http://127.0.0.1:3000/drivers`, 'GET');
             return dataFromDtb;
         });
+    }
+    selectDriver(location, deleteLocation) {
+        const drivers = document.querySelectorAll('.drivers-driver');
+        drivers.forEach(driver => {
+            driver.addEventListener('click', () => {
+                const _selectedDriver = driver;
+                location.value = _selectedDriver.innerHTML;
+                this.deleteRecords(deleteLocation);
+                this.deleteDivRecords(deleteLocation);
+            });
+        });
+    }
+    deleteRecords(location) {
+        const x = location.childNodes.length;
+        for (let i = 0; i < x; i++) {
+            location.firstChild.remove();
+        }
+    }
+    deleteDivRecords(location) {
+        console.log(location);
+        location.style.display = 'none';
     }
     showingRecords(location) {
         this._createRecords(location, this._dataFromDtb());
