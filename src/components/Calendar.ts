@@ -262,7 +262,8 @@ export class Calendar {
      * The method deletes the calendar
      */
     deleteCalendar = (): void => {
-        const _calendar = document.querySelector('.calendar');
+        const _calendar: HTMLDivElement = document.querySelector('.calendar');
+        // When you click on the calendar again, the next one does not appear
         if(_calendar != undefined){
             _calendar.remove();
         }
